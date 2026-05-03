@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="صفحة مستقلة لتفسير القرار الطبي في Medika AI.">
+    <meta name="theme-color" content="#7b183f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Medika AI">
+    <script>
+        try {
+            const storedTheme = localStorage.getItem("medika-theme-v1");
+            if (storedTheme === "dark" || storedTheme === "light") {
+                document.documentElement.dataset.theme = storedTheme;
+            }
+        } catch (error) {
+            // Ignore early theme bootstrap failures.
+        }
+    </script>
+    <title>Medika AI | تفسير القرار</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/app-icon-192.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=20260502h">
+</head>
+<body class="site-body document-page decision-page">
+    <a href="#main-content" class="skip-link">تجاوز إلى المحتوى</a>
+    <div class="page-shell">
+        <header class="site-header">
+            <nav class="navbar container py-3 px-4" aria-label="التنقل الرئيسي">
+                <a href="index.html#home" class="logo d-inline-flex align-items-center text-decoration-none">
+                    <span class="logo-mark"><i class="fas fa-heart-pulse" aria-hidden="true"></i></span>
+                    <span>
+                        <strong>Medika AI</strong>
+                        <small>تفسير القرار</small>
+                    </span>
+                </a>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="فتح وإغلاق القائمة">
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-panel" id="nav-menu">
+                    <ul class="nav-links mb-0">
+                        <li><a href="index.html#about">عن النظام</a></li>
+                        <li><a href="index.html#features">المزايا</a></li>
+                        <li><a href="index.html#team">الفريق</a></li>
+                        <li><a href="index.html#contact">تواصل معنا</a></li>
+                    </ul>
+                    <a href="chat.html" class="nav-cta nav-cta-soft text-decoration-none rounded-pill">العودة للشات</a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="document-main" id="main-content">
+            <section class="page-hero container reveal">
+                <div class="page-hero-card">
+                    <div>
+                        <span class="page-kicker">صفحة مستقلة للتفسير</span>
+                        <h1>كيف بُني القرار؟</h1>
+                        <p>صفحة مستقلة تعرض التخصص المتوقع، المرض المحتمل، مبررات الترجيح، والكلمات الأكثر تأثيرًا في النتيجة.</p>
+                    </div>
+                    <div class="doc-toolbar">
+                        <a href="chat.html" class="button button-secondary text-decoration-none">العودة للشات</a>
+                        <a href="dashboard.html" class="button button-secondary text-decoration-none">لوحة الطبيب</a>
+                        <button type="button" class="button button-secondary" id="share-decision-btn">مشاركة التفسير</button>
+                        <a href="report.html" class="button button-primary text-decoration-none">فتح ملخص الطبيب</a>
+                    </div>
+                </div>
+                <div class="page-tabs">
+                    <a href="report.html" class="page-tab">ملخص الطبيب</a>
+                    <a href="decision.html" class="page-tab is-active">تفسير القرار</a>
+                    <a href="integrative.html" class="page-tab">إرشادات داعمة</a>
+                </div>
+            </section>
+
+            <section class="document-section container reveal">
+                <div class="empty-state" id="decision-empty-state" hidden>
+                    <i class="fas fa-diagram-project" aria-hidden="true"></i>
+                    <h2>لا يوجد تفسير جاهز بعد</h2>
+                    <p>بعد إنهاء الجلسة في الشات سيظهر هنا تفسير مرتب لكيف وصل النظام إلى النتيجة.</p>
+                    <a href="chat.html" class="button button-primary text-decoration-none">اذهب إلى الشات</a>
+                </div>
+
+                <div id="decision-page-content">
+                    <div class="priority-banner" id="page-priority-banner" hidden>
+                        <div class="priority-banner-copy">
+                            <span class="priority-banner-kicker" id="page-priority-kicker">أولوية مرتفعة</span>
+                            <strong id="page-priority-title">لا تؤخر التقييم الطبي</strong>
+                            <p id="page-priority-text">هذه النتيجة تستدعي متابعة طبية في أقرب وقت، ويفضّل فتح ملخص الطبيب عند المراجعة.</p>
+                        </div>
+                        <div class="priority-banner-actions">
+                            <a href="chat.html" class="button button-secondary text-decoration-none" id="priority-banner-chat-link">العودة للشات</a>
+                            <a href="report.html" class="button button-primary text-decoration-none" id="priority-banner-report-link">فتح ملخص الطبيب</a>
+                        </div>
+                    </div>
+
+                    <article class="doc-card doc-card-wide urgent-checklist-card" id="urgent-checklist-card" hidden>
+                        <div class="panel-header">
+                            <h3 id="urgent-checklist-title">خطوات المتابعة السريعة</h3>
+                            <p id="urgent-checklist-text">ترتيب عملي مختصر للحالات التي تحتاج عدم تأخير المراجعة.</p>
+                        </div>
+                        <ul class="timeline-list" id="urgent-checklist-list">
+                            <li>-</li>
+                        </ul>
+                    </article>
+
+                    <div class="summary-grid">
+                        <article class="summary-item">
+                            <span>التخصص المتوقع</span>
+                            <strong id="decision-specialty">-</strong>
+                        </article>
+                        <article class="summary-item">
+                            <span>المرض المحتمل</span>
+                            <strong id="decision-condition">-</strong>
+                        </article>
+                        <article class="summary-item">
+                            <span>درجة الخطورة</span>
+                            <strong id="decision-risk">-</strong>
+                        </article>
+                        <article class="summary-item">
+                            <span>الخطوة التالية</span>
+                            <strong id="decision-next-step">-</strong>
+                        </article>
+                        <article class="summary-item">
+                            <span>الثقة الحالية</span>
+                            <strong id="decision-confidence">-</strong>
+                        </article>
+                        <article class="summary-item">
+                            <span>التخصص البديل القريب</span>
+                            <strong id="decision-alternative">-</strong>
+                        </article>
+                    </div>
+
+                    <div class="flow-grid">
+                        <article class="flow-card">
+                            <h3>المدخلات</h3>
+                            <p id="decision-input">-</p>
+                        </article>
+                        <article class="flow-card">
+                            <h3>التحليل</h3>
+                            <ul id="decision-analysis">
+                                <li>-</li>
+                            </ul>
+                        </article>
+                        <article class="flow-card">
+                            <h3>النتيجة</h3>
+                            <ul id="decision-output">
+                                <li>-</li>
+                            </ul>
+                        </article>
+                        <article class="flow-card">
+                            <h3>لماذا رُجّح هذا المرض؟</h3>
+                            <ul id="decision-condition-why">
+                                <li>-</li>
+                            </ul>
+                        </article>
+                        <article class="flow-card">
+                            <h3>مبررات القرار</h3>
+                            <ul id="decision-rationale">
+                                <li>-</li>
+                            </ul>
+                        </article>
+                        <article class="flow-card">
+                            <h3>العلامات الإنذارية</h3>
+                            <ul id="decision-condition-flags">
+                                <li>-</li>
+                            </ul>
+                        </article>
+                        <article class="flow-card">
+                            <h3>ملاحظة الثقة</h3>
+                            <p id="decision-confidence-note">-</p>
+                        </article>
+                        <article class="flow-card">
+                            <h3>ما الذي تغيّر بعد أسئلة المتابعة؟</h3>
+                            <p id="decision-refinement-summary">-</p>
+                        </article>
+                        <article class="flow-card">
+                            <h3>لماذا لم يرجح التخصص البديل؟</h3>
+                            <p id="decision-why-not-alt">-</p>
+                        </article>
+                    </div>
+
+                    <article class="doc-card doc-card-wide">
+                        <div class="panel-header">
+                            <h3>تفسير LIME</h3>
+                            <p id="lime-note">-</p>
+                        </div>
+                        <div class="lime-chips" id="lime-chips">
+                            <span class="placeholder-chip">-</span>
+                        </div>
+                    </article>
+
+                    <article class="doc-card doc-card-wide">
+                        <div class="panel-header">
+                            <h3 id="case-snapshot-title">متابعة الحالة محليًا</h3>
+                            <p id="case-snapshot-text">حالة المراجعة الحالية وموعد المتابعة إن وجد.</p>
+                        </div>
+                        <p id="case-snapshot-summary">-</p>
+                    </article>
+
+                    <article class="doc-card doc-card-wide feedback-card" id="decision-feedback-card">
+                        <div class="panel-header">
+                            <h3>هل كان التفسير واضحًا؟</h3>
+                            <p>يمكنك حفظ تقييم سريع وتحسينات مختصرة داخل السجل المحلي.</p>
+                        </div>
+                        <div class="feedback-options" id="decision-feedback-options">
+                            <button type="button" class="feedback-btn" data-feedback-value="helpful">واضح</button>
+                            <button type="button" class="feedback-btn" data-feedback-value="partly_helpful">مقبول</button>
+                            <button type="button" class="feedback-btn" data-feedback-value="not_helpful">غير واضح</button>
+                        </div>
+                        <textarea id="decision-feedback-comment" class="feedback-textarea" rows="3" placeholder="ما الذي يحتاج شرحًا أفضل؟"></textarea>
+                        <div class="feedback-actions">
+                            <button type="button" class="button button-secondary" id="decision-feedback-save">حفظ التقييم</button>
+                            <span class="feedback-status" id="decision-feedback-status"></span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app-config.js?v=20260502h"></script>
+    <script src="script.js?v=20260502h"></script>
+</body>
+</html>

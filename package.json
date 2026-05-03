@@ -1,0 +1,23 @@
+{
+  "name": "medika-ai-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Capacitor wrapper and mobile packaging setup for Medika AI.",
+  "scripts": {
+    "mobile:prepare": "powershell -ExecutionPolicy Bypass -File scripts/build-mobile-web.ps1",
+    "mobile:copy": "npm run mobile:prepare && npx cap copy",
+    "mobile:sync": "npm run mobile:prepare && npx cap sync",
+    "mobile:open:android": "npx cap open android",
+    "mobile:open:ios": "npx cap open ios",
+    "mobile:add:android": "npx cap add android",
+    "mobile:add:ios": "npx cap add ios"
+  },
+  "dependencies": {
+    "@capacitor/core": "^7.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/cli": "^7.0.0",
+    "@capacitor/ios": "^7.0.0"
+  }
+}

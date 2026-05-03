@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="لوحة محلية للطبيب في Medika AI تعرض الجلسات المحفوظة والمؤشرات العامة والتغذية الراجعة.">
+    <meta name="theme-color" content="#7b183f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Medika AI">
+    <script>
+        try {
+            const storedTheme = localStorage.getItem("medika-theme-v1");
+            if (storedTheme === "dark" || storedTheme === "light") {
+                document.documentElement.dataset.theme = storedTheme;
+            }
+            const lang = new URLSearchParams(window.location.search).get("lang") || localStorage.getItem("medika-home-language-v1");
+            if (lang === "en" || lang === "ar") {
+                document.documentElement.lang = lang;
+                document.documentElement.dir = lang === "en" ? "ltr" : "rtl";
+            }
+        } catch (error) {
+            // Ignore bootstrap storage failures.
+        }
+    </script>
+    <title>Medika AI | لوحة الطبيب</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/app-icon-192.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=20260502h">
+</head>
+<body class="site-body document-page dashboard-page">
+    <a href="#main-content" class="skip-link">تجاوز إلى المحتوى</a>
+    <div class="page-shell">
+        <header class="site-header">
+            <nav class="navbar container py-3 px-4" aria-label="التنقل الرئيسي">
+                <a href="index.html#home" class="logo d-inline-flex align-items-center text-decoration-none">
+                    <span class="logo-mark"><i class="fas fa-heart-pulse" aria-hidden="true"></i></span>
+                    <span>
+                        <strong>Medika AI</strong>
+                        <small id="dashboard-brand-subtitle">لوحة الطبيب</small>
+                    </span>
+                </a>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="فتح وإغلاق القائمة">
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-panel" id="nav-menu">
+                    <ul class="nav-links mb-0">
+                        <li><a href="index.html#about" id="dashboard-nav-about">عن النظام</a></li>
+                        <li><a href="index.html#features" id="dashboard-nav-features">المزايا</a></li>
+                        <li><a href="index.html#team" id="dashboard-nav-team">الفريق</a></li>
+                        <li><a href="index.html#contact" id="dashboard-nav-contact">تواصل معنا</a></li>
+                    </ul>
+                    <div class="nav-actions">
+                        <a href="chat.html" class="nav-cta nav-cta-soft text-decoration-none rounded-pill" id="dashboard-back-chat-link">العودة للشات</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="document-main" id="main-content">
+            <section class="page-hero container reveal">
+                <div class="page-hero-card">
+                    <div>
+                        <span class="page-kicker" id="dashboard-kicker">عرض محلي للطبيب أو الفريق</span>
+                        <h1 id="dashboard-title">لوحة مراجعة الجلسات والمؤشرات</h1>
+                        <p id="dashboard-description">
+                            صفحة تجمع الجلسات المحفوظة، مؤشرات الاستخدام المحلية، المرفقات، والتغذية الراجعة في مكان واحد لتسهيل المراجعة السريعة.
+                        </p>
+                    </div>
+                    <div class="doc-toolbar">
+                        <a href="chat.html" class="button button-secondary text-decoration-none" id="dashboard-open-chat-btn">العودة للشات</a>
+                        <button type="button" class="button button-secondary" id="dashboard-export-btn">تنزيل JSON</button>
+                        <button type="button" class="button button-primary" id="dashboard-clear-analytics-btn">مسح المؤشرات</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="document-section container reveal">
+                <div class="summary-grid dashboard-metrics-grid" id="dashboard-metrics-grid"></div>
+
+                <div class="dashboard-overview-grid">
+                    <article class="doc-card dashboard-profile-card">
+                        <div class="panel-header">
+                            <h3 id="dashboard-profile-title">الحساب النشط</h3>
+                            <p id="dashboard-profile-text">هوية الجلسات الحالية داخل هذا الجهاز.</p>
+                        </div>
+                        <div class="dashboard-profile-summary" id="dashboard-profile-summary"></div>
+                    </article>
+
+                    <article class="doc-card dashboard-insights-card">
+                        <div class="panel-header">
+                            <h3 id="dashboard-insights-title">Insights سريعة</h3>
+                            <p id="dashboard-insights-text">خلاصة مفيدة عن أكثر الأنماط شيوعًا في الجلسات المحفوظة.</p>
+                        </div>
+                        <ul class="timeline-list" id="dashboard-insights-list">
+                            <li>-</li>
+                        </ul>
+                    </article>
+
+                    <article class="doc-card dashboard-reminders-card">
+                        <div class="panel-header">
+                            <h3 id="dashboard-reminders-title">متابعات وتذكيرات</h3>
+                            <p id="dashboard-reminders-text">عناصر محلية تساعدك على عدم نسيان الحالات أو الملفات التي تحتاج متابعة.</p>
+                        </div>
+                        <div class="dashboard-reminders-list" id="dashboard-reminders-list"></div>
+                    </article>
+                </div>
+
+                <div class="dashboard-charts-grid">
+                    <article class="doc-card">
+                        <div class="panel-header">
+                            <h3 id="dashboard-chart-specialty-title">توزيع التخصصات</h3>
+                            <p id="dashboard-chart-specialty-text">أكثر التخصصات تكرارًا عبر الجلسات المحفوظة.</p>
+                        </div>
+                        <div class="mini-chart-list" id="dashboard-specialty-chart"></div>
+                    </article>
+
+                    <article class="doc-card">
+                        <div class="panel-header">
+                            <h3 id="dashboard-chart-risk-title">توزيع الخطورة</h3>
+                            <p id="dashboard-chart-risk-text">كيف تتوزع الجلسات بين المستويات المختلفة.</p>
+                        </div>
+                        <div class="mini-chart-list" id="dashboard-risk-chart"></div>
+                    </article>
+
+                    <article class="doc-card">
+                        <div class="panel-header">
+                            <h3 id="dashboard-chart-review-title">توزيع حالات المراجعة</h3>
+                            <p id="dashboard-chart-review-text">كيف تتوزع الجلسات بين جديدة، مراجعَة، متابعة، أو مغلقة.</p>
+                        </div>
+                        <div class="mini-chart-list" id="dashboard-review-chart"></div>
+                    </article>
+
+                    <article class="doc-card">
+                        <div class="panel-header">
+                            <h3 id="dashboard-chart-activity-title">نشاط آخر 7 أيام</h3>
+                            <p id="dashboard-chart-activity-text">عدد الجلسات المحفوظة يوميًا خلال آخر أسبوع.</p>
+                        </div>
+                        <div class="mini-chart-list" id="dashboard-activity-chart"></div>
+                    </article>
+                </div>
+
+                <div class="dashboard-filters">
+                    <label class="dashboard-filter">
+                        <span id="dashboard-filter-search-label">بحث</span>
+                        <input type="search" id="dashboard-search-input" class="form-control" placeholder="ابحث في الشكوى أو الملاحظات">
+                    </label>
+                    <label class="dashboard-filter">
+                        <span id="dashboard-filter-risk-label">الخطورة</span>
+                        <select id="dashboard-risk-filter" class="form-select">
+                            <option value="">الكل</option>
+                            <option value="low">منخفض</option>
+                            <option value="medium">متوسط</option>
+                            <option value="high">مرتفع</option>
+                            <option value="urgent">عاجل</option>
+                            <option value="emergency">طارئ</option>
+                        </select>
+                    </label>
+                    <label class="dashboard-filter">
+                        <span id="dashboard-filter-role-label">الدور</span>
+                        <select id="dashboard-role-filter" class="form-select">
+                            <option value="">الكل</option>
+                            <option value="patient">مريض</option>
+                            <option value="doctor">طبيب</option>
+                        </select>
+                    </label>
+                    <label class="dashboard-filter">
+                        <span id="dashboard-filter-review-label">حالة المراجعة</span>
+                        <select id="dashboard-review-filter" class="form-select">
+                            <option value="">الكل</option>
+                            <option value="new">جديدة</option>
+                            <option value="reviewed">تمت المراجعة</option>
+                            <option value="follow_up">تحتاج متابعة</option>
+                            <option value="closed">مغلقة</option>
+                        </select>
+                    </label>
+                    <label class="dashboard-filter">
+                        <span id="dashboard-filter-specialty-label">التخصص</span>
+                        <select id="dashboard-specialty-filter" class="form-select">
+                            <option value="">الكل</option>
+                        </select>
+                    </label>
+                    <label class="dashboard-filter">
+                        <span id="dashboard-filter-profile-label">الحساب</span>
+                        <select id="dashboard-profile-filter" class="form-select">
+                            <option value="">الكل</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="empty-state" id="dashboard-empty-state" hidden>
+                    <i class="fas fa-chart-line" aria-hidden="true"></i>
+                    <h2 id="dashboard-empty-title">لا توجد جلسات محفوظة بعد</h2>
+                    <p id="dashboard-empty-text">بعد إنهاء جلسة واحدة على الأقل، ستظهر هنا المؤشرات والبطاقات القابلة للفتح.</p>
+                    <a href="chat.html" class="button button-primary text-decoration-none" id="dashboard-empty-go-chat">اذهب إلى الشات</a>
+                </div>
+
+                <div class="dashboard-session-list" id="dashboard-session-list"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app-config.js?v=20260502h"></script>
+    <script src="script.js?v=20260502h"></script>
+</body>
+</html>

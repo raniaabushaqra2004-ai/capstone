@@ -1,0 +1,334 @@
+[
+  {
+    "id": "gi_gastritis",
+    "specialty": "الجهاز الهضمي",
+    "condition_ar": "التهاب المعدة أو عسر الهضم",
+    "condition_en": "Gastritis or indigestion",
+    "summary_ar": "يصبح هذا الاحتمال أقرب عندما يتركز الانزعاج في أعلى البطن أو المعدة، خصوصًا بعد الأكل أو مع غثيان وامتلاء.",
+    "summary_en": "This becomes more likely when discomfort is centered in the upper abdomen or stomach, especially after meals with nausea or fullness.",
+    "keywords": ["معده", "فم المعده", "اعلى البطن", "اعلي البطن", "بعد الاكل", "عسر هضم", "امتلاء", "غثيان"]
+  },
+  {
+    "id": "gi_reflux",
+    "specialty": "الجهاز الهضمي",
+    "condition_ar": "ارتجاع مريئي أو حموضة",
+    "condition_en": "Acid reflux or heartburn",
+    "summary_ar": "يُفكَّر به أكثر إذا كان هناك إحساس حارق أو طعم حامض أو انزعاج يصعد من المعدة إلى الصدر أو الحلق.",
+    "summary_en": "It becomes more likely when there is burning, a sour taste, or discomfort rising from the stomach toward the chest or throat.",
+    "keywords": ["حرقه", "حموضه", "ارتجاع", "صدر", "حلق", "طعم حامض"]
+  },
+  {
+    "id": "gi_ibs",
+    "specialty": "الجهاز الهضمي",
+    "condition_ar": "تشنج قولون أو قولون عصبي",
+    "condition_en": "Bowel spasm or irritable bowel syndrome",
+    "summary_ar": "يصبح هذا أقرب عندما تكون الشكوى مغصًا أو انتفاخًا أو غازات أو تغيرًا واضحًا في التبرز مثل الإمساك أو الإسهال.",
+    "summary_en": "This becomes more likely when the complaint is cramps, bloating, gas, or a clear bowel habit change such as constipation or diarrhea.",
+    "keywords": ["مغص", "قولون", "انتفاخ", "غازات", "امساك", "اسهال", "تبرز"]
+  },
+  {
+    "id": "gi_gastroenteritis",
+    "specialty": "الجهاز الهضمي",
+    "condition_ar": "نزلة معوية أو تلبك غذائي",
+    "condition_en": "Gastroenteritis or food-related irritation",
+    "summary_ar": "يُطرح هذا الاحتمال أكثر عند وجود غثيان أو قيء أو حرارة أو بداية الأعراض بعد طعام مشتبه به.",
+    "summary_en": "This possibility rises when nausea, vomiting, fever, or symptoms after a suspicious meal are present.",
+    "keywords": ["غثيان", "قيء", "استفراغ", "حراره", "حمى", "اكل", "طعام", "تسمم", "اسهال"]
+  },
+  {
+    "id": "gi_biliary",
+    "specialty": "الجهاز الهضمي",
+    "condition_ar": "مغص مراري أو تهيج في المرارة",
+    "condition_en": "Biliary colic or gallbladder irritation",
+    "summary_ar": "قد يكون واردًا إذا كان الألم يميل إلى الجهة اليمنى من أعلى البطن أو يرتبط بالأكل الدسم.",
+    "summary_en": "This can be considered when pain leans toward the right upper abdomen or is triggered by fatty meals.",
+    "keywords": ["يمين", "الجهه اليمنى", "اعلى البطن", "دهني", "دسم", "مراره", "كتف"]
+  },
+  {
+    "id": "cardio_arrhythmia",
+    "specialty": "أمراض القلب",
+    "condition_ar": "خفقان أو اضطراب في نظم القلب",
+    "condition_en": "Palpitations or a heart rhythm disturbance",
+    "summary_ar": "يصبح هذا الاحتمال أقرب عندما يكون العرض الأساسي هو تسارع النبض أو عدم انتظامه أو الإحساس برفرفة واضحة.",
+    "summary_en": "This becomes more likely when the main complaint is a fast pulse, an irregular heartbeat, or a clear fluttering feeling.",
+    "keywords": ["خفقان", "نبض", "تسارع", "رفرفه", "عدم انتظام"]
+  },
+  {
+    "id": "cardio_angina",
+    "specialty": "أمراض القلب",
+    "condition_ar": "نمط ألم صدري قد ينسجم مع ذبحة صدرية أو نقص تروية",
+    "condition_en": "A chest-pain pattern that may fit angina or ischemia",
+    "summary_ar": "نضع هذا الاحتمال في الحسبان أكثر إذا كان الوصف ضغطًا أو ثقلًا في الصدر، خاصة مع ضيق نفس أو تعرّق أو امتداد الألم إلى الذراع أو الفك أو الظهر.",
+    "summary_en": "This possibility moves higher when chest discomfort feels like pressure or heaviness, especially with shortness of breath, sweating, or pain spreading to the arm, jaw, or back.",
+    "keywords": ["صدر", "ضغط صدر", "ثقل", "ضيق تنفس", "تعرق", "ذراع", "فك", "ظهر", "يمتد"],
+    "support_keywords": ["كتمه", "نبض", "خفقان"],
+    "source": "Curated specialty KB"
+  },
+  {
+    "id": "cardio_chest_wall",
+    "specialty": "أمراض القلب",
+    "condition_ar": "ألم من جدار الصدر أو شد عضلي",
+    "condition_en": "Chest wall pain or muscular strain",
+    "summary_ar": "يبقى احتمالًا إذا كان الألم يزداد مع الحركة أو اللمس أو وضعية الجسم أكثر من كونه ضغطًا داخليًا مستمرًا.",
+    "summary_en": "It remains possible when pain worsens with movement, touch, or position more than with internal pressure-like discomfort.",
+    "keywords": ["حركه", "عند الحركه", "مع الحركه", "لمس", "شد", "عضل", "وخز"]
+  },
+  {
+    "id": "cardio_reflux_mimic",
+    "specialty": "أمراض القلب",
+    "condition_ar": "حموضة أو ارتجاع قد يفسران ألمًا يشبه ألم الصدر",
+    "condition_en": "Reflux or heartburn mimicking chest discomfort",
+    "summary_ar": "قد يكون هذا أقرب إذا كان انزعاج الصدر يترافق مع حرقة أو يبدأ بعد الطعام أو يتحسن مع مضادات الحموضة.",
+    "summary_en": "This may be more likely when chest discomfort comes with burning, starts after meals, or improves with antacid-type relief.",
+    "keywords": ["حرقه", "حموضه", "ارتجاع", "بعد الاكل", "معده"],
+    "support_keywords": ["صدر"]
+  },
+  {
+    "id": "cardio_bp",
+    "specialty": "أمراض القلب",
+    "condition_ar": "تذبذب ضغط الدم أو ارتفاعه",
+    "condition_en": "Blood pressure fluctuation or hypertension-related symptoms",
+    "summary_ar": "يدخل في الاحتمال عندما تجتمع الدوخة أو الصداع أو الخفقان أو الثقل من دون صورة واضحة لسبب آخر.",
+    "summary_en": "This enters the differential when dizziness, headache, palpitations, or heaviness cluster without a clearer alternative explanation.",
+    "keywords": ["ضغط الدم", "ارتفاع الضغط", "هبوط الضغط"],
+    "support_keywords": ["صداع", "دوخه", "خفقان"],
+    "exclude_keywords": ["ضغط صدر"],
+    "source": "Curated specialty KB"
+  },
+  {
+    "id": "neuro_migraine",
+    "specialty": "طب الاعصاب",
+    "condition_ar": "شقيقة أو صداع نصفي",
+    "condition_en": "Migraine",
+    "summary_ar": "يصبح هذا الاحتمال أقرب عندما يكون الصداع مع غثيان أو زغللة أو حساسية للضوء أو الصوت أو يتركز في جهة واحدة.",
+    "summary_en": "This becomes more likely when headache comes with nausea, visual disturbance, light or sound sensitivity, or favors one side.",
+    "keywords": ["صداع", "شقيقه", "غثيان", "زغلله", "ضوء", "صوت", "نصف", "جهه واحده"],
+    "support_keywords": ["تشوش", "نبضي", "خفقان بالرأس"],
+    "source": "Curated specialty KB"
+  },
+  {
+    "id": "neuro_tension",
+    "specialty": "طب الاعصاب",
+    "condition_ar": "صداع توتري أو شد في عضلات الرقبة",
+    "condition_en": "Tension headache or neck-muscle strain",
+    "summary_ar": "يُفكر به أكثر إذا كان الوصف أقرب إلى ضغط أو شد في الرأس والرقبة مع توتر أو قلة نوم أو إجهاد.",
+    "summary_en": "It becomes more likely when the pattern feels more like pressure or tightness in the head and neck with stress, poor sleep, or fatigue.",
+    "keywords": ["توتر", "شد", "رقبه", "رقبة", "مؤخره", "قله النوم", "اجهاد", "ضغط"]
+  },
+  {
+    "id": "neuro_vestibular",
+    "specialty": "طب الاعصاب",
+    "condition_ar": "دوار أو اضطراب دهليزي",
+    "condition_en": "Dizziness or a vestibular balance-related problem",
+    "summary_ar": "يصبح هذا الاحتمال أقرب إذا كانت الدوخة أو عدم التوازن أو الإحساس بالدوران هو العرض الأبرز.",
+    "summary_en": "This becomes more likely when dizziness, imbalance, or a spinning sensation is the main complaint.",
+    "keywords": ["دوخه", "دوار", "توازن", "لفه", "عدم توازن"]
+  },
+  {
+    "id": "neuro_nerve",
+    "specialty": "طب الاعصاب",
+    "condition_ar": "تهيج عصب أو مشكلة عصبية طرفية",
+    "condition_en": "Nerve irritation or a peripheral neurological issue",
+    "summary_ar": "يدخل في الاحتمال إذا كانت الشكوى تتضمن تنميلًا أو خدرًا أو ضعفًا جديدًا أو متفاقمًا في طرف من الأطراف.",
+    "summary_en": "This becomes relevant if the complaint includes new or worsening numbness, tingling, or weakness in a limb.",
+    "keywords": ["تنميل", "خدر", "ضعف", "يد", "رجل", "ذراع"]
+  },
+  {
+    "id": "neuro_visual_sinus",
+    "specialty": "طب الاعصاب",
+    "condition_ar": "إجهاد بصري أو صداع مرتبط بالعين أو الجيوب",
+    "condition_en": "Visual strain or an eye- or sinus-related headache",
+    "summary_ar": "قد يكون واردًا إذا ترافق الصداع مع تشوش رؤية أو ألم حول العين أو إحساس بثقل في الوجه أو الجبهة.",
+    "summary_en": "This may fit when headache comes with blurred vision, pain around the eyes, or heaviness in the face or forehead.",
+    "keywords": ["عين", "تشوش", "زغلله", "جيوب", "جبهه", "حول العين"]
+  },
+  {
+    "id": "ortho_sprain_fracture",
+    "specialty": "جراحة العظام والمفاصل",
+    "condition_ar": "التواء أو كدمة أو كسر حسب شدة الإصابة",
+    "condition_en": "A sprain, bruise, or fracture depending on injury severity",
+    "summary_ar": "يرتفع هذا الاحتمال إذا بدأت الأعراض بعد سقوط أو ضربة أو حادث أو التواء واضح.",
+    "summary_en": "This becomes more likely when symptoms started after a fall, direct blow, accident, or clear twisting injury.",
+    "keywords": ["سقط", "وقع", "ضربه", "دكمه", "حادث", "التواء", "التوى", "كسر", "اصابه"]
+  },
+  {
+    "id": "ortho_tendon_joint",
+    "specialty": "جراحة العظام والمفاصل",
+    "condition_ar": "التهاب أوتار أو أربطة أو تهيج في المفصل",
+    "condition_en": "Tendon or ligament irritation, or a joint problem",
+    "summary_ar": "يصبح هذا أقرب عندما يكون الألم موضعًا في الكتف أو الركبة أو مفصل معين ويزداد مع الحركة.",
+    "summary_en": "This becomes more likely when pain is localized to the shoulder, knee, or another joint and worsens with movement.",
+    "keywords": ["كتف", "ركبه", "مفصل", "حركه", "ورك", "رسغ", "ذراع"]
+  },
+  {
+    "id": "ortho_disc",
+    "specialty": "جراحة العظام والمفاصل",
+    "condition_ar": "تهيج غضروف أو مشكلة في العمود الفقري",
+    "condition_en": "Disc irritation or a spine-related problem",
+    "summary_ar": "يُطرح هذا الاحتمال أكثر عندما تكون الشكوى في الظهر أو الرقبة أو أسفل الظهر مع شد أو ألم متكرر.",
+    "summary_en": "This becomes more likely when the complaint centers on the back, neck, or lower back with recurrent strain-like pain.",
+    "keywords": ["ظهر", "رقبه", "رقبة", "اسفل الظهر", "فقرات", "غضروف"]
+  },
+  {
+    "id": "ortho_radiculopathy",
+    "specialty": "جراحة العظام والمفاصل",
+    "condition_ar": "ضغط على عصب أو انضغاط جذور عصبية",
+    "condition_en": "Nerve compression or nerve-root irritation",
+    "summary_ar": "يصبح هذا أقرب إذا كان الألم يمتد للطرف أو يترافق مع تنميل أو خدر أو ضعف.",
+    "summary_en": "This becomes more likely when pain radiates into a limb or comes with numbness, tingling, or weakness.",
+    "keywords": ["يمتد", "ينتشر", "تنميل", "خدر", "ضعف", "رجل", "يد", "ذراع"]
+  },
+  {
+    "id": "ortho_heel",
+    "specialty": "جراحة العظام والمفاصل",
+    "condition_ar": "التهاب اللفافة الأخمصية أو ألم كعب ميكانيكي",
+    "condition_en": "Plantar fasciitis or mechanical heel pain",
+    "summary_ar": "قد يكون هذا واردًا إذا كان الوجع أسفل الكعب أو باطن القدم ويزداد مع الوقوف أو المشي.",
+    "summary_en": "This can fit when pain is under the heel or sole and worsens with standing or walking.",
+    "keywords": ["كعب", "اسفل القدم", "باطن القدم", "وقوف", "مشي"]
+  },
+  {
+    "id": "skin_contact",
+    "specialty": "الأمراض الجلدية",
+    "condition_ar": "تحسس جلدي أو التهاب جلد تماسي",
+    "condition_en": "An allergic skin reaction or contact dermatitis",
+    "summary_ar": "يصبح هذا الاحتمال أقرب إذا بدأت الأعراض بعد دواء جديد أو طعام أو صابون أو كريم أو مادة ملامسة للجلد.",
+    "summary_en": "This becomes more likely if symptoms began after a new medication, food, soap, cream, or another skin exposure.",
+    "keywords": ["تحسس", "حساسيه", "دواء", "طعام", "صابون", "كريم", "ماده", "منظف"]
+  },
+  {
+    "id": "skin_eczema",
+    "specialty": "الأمراض الجلدية",
+    "condition_ar": "أكزيما أو التهاب جلدي تحسسي",
+    "condition_en": "Eczema or inflammatory dermatitis",
+    "summary_ar": "يُفكر به أكثر إذا كانت الحكة مع جفاف أو قشور أو تهيج متكرر في الجلد.",
+    "summary_en": "It becomes more likely when itching comes with dryness, scaling, or recurrent skin irritation.",
+    "keywords": ["حكه", "جفاف", "قشور", "اكزيما", "تهيج"]
+  },
+  {
+    "id": "skin_hives",
+    "specialty": "الأمراض الجلدية",
+    "condition_ar": "شرى أو طفح تحسسي التهابي",
+    "condition_en": "Hives or an allergic inflammatory rash",
+    "summary_ar": "يرتفع هذا الاحتمال إذا ظهر الطفح فجأة وكان مصحوبًا بحكة أو انتشار سريع.",
+    "summary_en": "This becomes more likely when the rash appears suddenly and is accompanied by itching or rapid spread.",
+    "keywords": ["طفح", "حكه", "احمرار", "فجاه", "فجأة", "انتشار"]
+  },
+  {
+    "id": "skin_fungal",
+    "specialty": "الأمراض الجلدية",
+    "condition_ar": "فطريات سطحية في الجلد",
+    "condition_en": "A superficial fungal skin infection",
+    "summary_ar": "قد يكون هذا أقرب إذا كان الطفح دائريًا أو متقشرًا أو موجودًا بين الأصابع أو في مناطق رطبة.",
+    "summary_en": "This may be more likely when the rash is circular, scaly, or located between the toes, fingers, or other moist areas.",
+    "keywords": ["فطريات", "دائري", "تقشر", "بين الاصابع", "رطوبه"]
+  },
+  {
+    "id": "skin_infection",
+    "specialty": "الأمراض الجلدية",
+    "condition_ar": "التهاب جلدي سطحي أو عدوى موضعية",
+    "condition_en": "A superficial skin infection or localized inflammation",
+    "summary_ar": "يُطرح هذا الاحتمال إذا كان هناك احمرار موضعي أو ألم أو سخونة أو تغير واضح في الجلد بمكان محدد.",
+    "summary_en": "This enters the differential when there is localized redness, pain, warmth, or a clear change in one skin area.",
+    "keywords": ["احمرار", "سخونه", "الم", "جلد", "موضعي", "التهاب"]
+  },
+  {
+    "id": "internal_anemia",
+    "specialty": "الباطنية",
+    "condition_ar": "فقر دم أو نقص عناصر غذائية",
+    "condition_en": "Anemia or a nutritional deficiency",
+    "summary_ar": "يصبح هذا الاحتمال أقرب إذا كان التعب مع دوخة أو ضعف أو شحوب هو العرض الأبرز.",
+    "summary_en": "This becomes more likely when fatigue with dizziness, weakness, or pallor is the dominant pattern.",
+    "keywords": ["تعب", "دوخه", "ضعف", "شحوب", "خمول", "فقر دم"]
+  },
+  {
+    "id": "internal_systemic_infection",
+    "specialty": "الباطنية",
+    "condition_ar": "التهاب أو عدوى عامة",
+    "condition_en": "A systemic infection or inflammatory condition",
+    "summary_ar": "يُفكر به أكثر إذا كانت الحرارة أو القشعريرة أو الشعور العام بالمرض جزءًا واضحًا من الشكوى.",
+    "summary_en": "It becomes more likely when fever, chills, or a generalized sick feeling are a clear part of the complaint.",
+    "keywords": ["حراره", "حمى", "قشعريره", "التهاب", "تعب عام"]
+  },
+  {
+    "id": "internal_diabetes",
+    "specialty": "الباطنية",
+    "condition_ar": "اضطراب في سكر الدم",
+    "condition_en": "A blood sugar problem",
+    "summary_ar": "يدخل في الاحتمال إذا تضمنت الشكوى عطشًا أو تبولًا متكررًا أو رجفة أو هبوطًا عامًا.",
+    "summary_en": "This should be considered when the complaint includes thirst, frequent urination, tremor, or a crash-like low-energy feeling.",
+    "keywords": ["سكر", "عطش", "تبول", "رجفه", "رجفة", "هبوط"]
+  },
+  {
+    "id": "internal_thyroid",
+    "specialty": "الباطنية",
+    "condition_ar": "اضطراب في الغدة الدرقية أو الهرمونات",
+    "condition_en": "A thyroid or hormonal problem",
+    "summary_ar": "يُطرح هذا الاحتمال إذا اجتمع تغير الوزن أو الخفقان أو عدم تحمل الحر أو البرد مع الخمول أو التعب.",
+    "summary_en": "This enters the differential when weight change, palpitations, heat or cold intolerance, and sluggishness cluster together.",
+    "keywords": ["غده", "غدة", "وزن", "خفقان", "برد", "حر", "خمول"]
+  },
+  {
+    "id": "internal_dehydration",
+    "specialty": "الباطنية",
+    "condition_ar": "جفاف أو هبوط ضغط",
+    "condition_en": "Dehydration or low blood pressure",
+    "summary_ar": "قد يكون هذا أقرب إذا كانت الدوخة أو التعب أو الصداع تزداد مع الوقوف أو قلة السوائل.",
+    "summary_en": "This may fit when dizziness, fatigue, or headache worsen with standing or poor fluid intake.",
+    "keywords": ["دوخه", "تعب", "صداع", "وقوف", "سوائل", "جفاف", "ضغط"]
+  },
+  {
+    "id": "internal_urinary",
+    "specialty": "الباطنية",
+    "condition_ar": "التهاب بولي أو مشكلة كلوية بسيطة",
+    "condition_en": "A urinary infection or a mild kidney-related problem",
+    "summary_ar": "يُفكر به إذا كانت هناك أعراض بولية مثل الحرقان أو كثرة التبول أو ألم الخاصرة.",
+    "summary_en": "This becomes more likely when urinary burning, frequent urination, or flank pain are present.",
+    "keywords": ["حرقان البول", "تبول", "بول", "خاصره", "خاصرة", "حرقان"]
+  },
+  {
+    "id": "general_viral",
+    "specialty": "طب عام",
+    "condition_ar": "بداية عدوى فيروسية خفيفة أو التهاب عام بسيط",
+    "condition_en": "An early mild viral illness or simple generalized inflammation",
+    "summary_ar": "يُطرح هذا الاحتمال عندما تكون الأعراض عامة وغير مركزة في عضو واحد، مثل التعب والصداع الخفيف والشعور العام بالتعب.",
+    "summary_en": "This becomes possible when symptoms are broad and not focused on one organ, such as fatigue, mild headache, and a general unwell feeling.",
+    "keywords": ["تعب", "صداع", "حراره", "حمى", "رشح", "عام"]
+  },
+  {
+    "id": "general_dehydration",
+    "specialty": "طب عام",
+    "condition_ar": "جفاف أو إجهاد عام أو هبوط بسيط",
+    "condition_en": "Dehydration, generalized fatigue, or a mild systemic dip",
+    "summary_ar": "يصبح هذا أقرب عندما تكون الشكوى دوخة أو تعبًا أو ضعفًا غير محدد، خاصة مع قلة الأكل أو الشرب أو الإجهاد.",
+    "summary_en": "This becomes more likely when the complaint is vague dizziness, fatigue, or weakness, especially with poor intake or exertion.",
+    "keywords": ["دوخه", "تعب", "ضعف", "قله الاكل", "قله الشرب", "اجهاد", "هبوط"]
+  },
+  {
+    "id": "general_gastro",
+    "specialty": "طب عام",
+    "condition_ar": "شكوى هضمية أولية تحتاج فرزًا عامًا",
+    "condition_en": "An early digestive complaint needing general triage",
+    "summary_ar": "قد يكون هذا مناسبًا عندما تكون الأعراض في البطن أو المعدة لكن الصورة ما تزال عامة ولم تتضح بعد.",
+    "summary_en": "This can fit when symptoms are in the stomach or abdomen but the overall picture is still broad and not yet clearly defined.",
+    "keywords": ["بطن", "معده", "غثيان", "مغص", "انتفاخ"]
+  },
+  {
+    "id": "general_msk",
+    "specialty": "طب عام",
+    "condition_ar": "شد عضلي أو ألم ميكانيكي بسيط",
+    "condition_en": "A mild muscular strain or mechanical pain pattern",
+    "summary_ar": "يبقى ضمن الاحتمالات عندما يكون الألم مرتبطًا بالحركة أو الجهد لكن من دون علامات إصابة شديدة واضحة.",
+    "summary_en": "This remains possible when pain is linked to movement or exertion without clear signs of a major injury.",
+    "keywords": ["حركه", "وجع", "الم", "جهد", "شد", "عضل"]
+  },
+  {
+    "id": "general_unspecified",
+    "specialty": "طب عام",
+    "condition_ar": "نمط يحتاج تقييمًا أوليًا لتوجيه التخصص",
+    "condition_en": "A pattern that needs an initial review to narrow the right specialty",
+    "summary_ar": "يُستخدم هذا المسار عندما تكون الشكوى غير محددة بما يكفي ويحتاج الطبيب العام لترتيب ما إذا كانت هضمية أو عصبية أو باطنية أو عضلية.",
+    "summary_en": "This path fits when the complaint is not specific enough and a general clinician needs to decide whether it is digestive, neurological, internal, or musculoskeletal.",
+    "keywords": ["غير محدد", "عام", "وجع", "الم", "تعب"]
+  }
+]

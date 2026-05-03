@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Doctor summary page for Medika AI.">
+    <meta name="theme-color" content="#7b183f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Medika AI">
+    <script>
+        try {
+            const storedTheme = localStorage.getItem("medika-theme-v1");
+            if (storedTheme === "dark" || storedTheme === "light") {
+                document.documentElement.dataset.theme = storedTheme;
+            }
+        } catch (error) {
+            // Ignore early theme bootstrap failures.
+        }
+    </script>
+    <title>Medika AI | Doctor Summary</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/app-icon-192.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=20260502h">
+</head>
+
+<body class="site-body document-page report-page">
+    <a href="#main-content" class="skip-link">تجاوز إلى المحتوى</a>
+    <div class="page-shell">
+        <header class="site-header">
+            <nav class="navbar container py-3 px-4" aria-label="Main navigation">
+                <a href="index.html#home" class="logo d-inline-flex align-items-center text-decoration-none">
+                    <span class="logo-mark">
+                        <i class="fas fa-heart-pulse" aria-hidden="true"></i>
+                    </span>
+                    <span>
+                        <strong>Medika AI</strong>
+                        <small data-i18n="brand_subtitle">ملخص الطبيب</small>
+                    </span>
+                </a>
+
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <div class="nav-panel" id="nav-menu">
+                    <ul class="nav-links mb-0">
+                        <li><a href="index.html#about" data-i18n="nav_about">عن النظام</a></li>
+                        <li><a href="index.html#features" data-i18n="nav_features">المزايا</a></li>
+                        <li><a href="index.html#team" data-i18n="nav_team">الفريق</a></li>
+                        <li><a href="index.html#contact" data-i18n="nav_contact">تواصل معنا</a></li>
+                    </ul>
+
+                    <a href="chat.html" class="nav-cta nav-cta-soft text-decoration-none rounded-pill" data-i18n="back_chat">
+                        العودة للشات
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="document-main" id="main-content">
+            <section class="page-hero container reveal">
+                <div class="page-hero-card">
+                    <div>
+                        <span class="page-kicker" data-i18n="report_badge">صفحة مستقلة للطبيب</span>
+                        <h1 data-i18n="report_title">ملخص الحالة للطبيب</h1>
+                        <p data-i18n="report_description">
+                            ملخص واضح ومختصر للحالة الطبية يتضمن أهم النتائج والتوصيات والخطوة التالية.
+                        </p>
+                    </div>
+
+                    <div class="doc-toolbar">
+                        <a href="chat.html" class="button button-secondary text-decoration-none" data-i18n="back_chat">
+                            العودة للشات
+                        </a>
+                        <a href="dashboard.html" class="button button-secondary text-decoration-none" id="open-dashboard-btn">
+                            لوحة الطبيب
+                        </a>
+                        <button type="button" class="button button-secondary" id="copy-report-btn" data-i18n="copy_report">
+                            نسخ التقرير
+                        </button>
+                        <button type="button" class="button button-secondary" id="share-report-btn">
+                            مشاركة الملخص
+                        </button>
+                        <button type="button" class="button button-primary" id="print-report-btn" data-i18n="print_pdf">
+                            تصدير PDF / طباعة
+                        </button>
+                    </div>
+                </div>
+
+                <div class="page-tabs">
+                    <a href="report.html" class="page-tab is-active" data-i18n="tab_report">ملخص الطبيب</a>
+                    <a href="decision.html" class="page-tab" data-i18n="tab_decision">تفسير القرار</a>
+                    <a href="integrative.html" class="page-tab" data-i18n="tab_tips">إرشادات داعمة</a>
+                </div>
+            </section>
+
+            <section class="document-section container reveal">
+                <div class="empty-state" id="report-empty-state" hidden>
+                    <i class="fas fa-folder-open" aria-hidden="true"></i>
+                    <h2 data-i18n="empty_title">لا يوجد تقرير جاهز بعد</h2>
+                    <p data-i18n="empty_text">
+                        ابدأ الجلسة من صفحة الشات أولًا، وبعد إكمال التقييم سيظهر التقرير هنا بشكل تلقائي.
+                    </p>
+                    <a href="chat.html" class="button button-primary text-decoration-none" data-i18n="go_chat">
+                        اذهب إلى الشات
+                    </a>
+                </div>
+
+                <div id="report-page-content">
+                    <div class="priority-banner" id="page-priority-banner" hidden>
+                        <div class="priority-banner-copy">
+                            <span class="priority-banner-kicker" id="page-priority-kicker">أولوية مرتفعة</span>
+                            <strong id="page-priority-title">لا تؤخر التقييم الطبي</strong>
+                            <p id="page-priority-text">هذه النتيجة تستدعي متابعة طبية في أقرب وقت، ويفضّل الاحتفاظ بهذا الملخص عند المراجعة.</p>
+                        </div>
+                        <div class="priority-banner-actions">
+                            <a href="chat.html" class="button button-secondary text-decoration-none" id="priority-banner-chat-link">العودة للشات</a>
+                            <a href="report.html" class="button button-primary text-decoration-none" id="priority-banner-report-link">طباعة / PDF</a>
+                        </div>
+                    </div>
+
+                    <article class="doc-card doc-card-wide urgent-checklist-card" id="urgent-checklist-card" hidden>
+                        <div class="panel-header">
+                            <h3 id="urgent-checklist-title">خطوات المتابعة السريعة</h3>
+                            <p id="urgent-checklist-text">ترتيب عملي مختصر للحالات التي تحتاج عدم تأخير المراجعة.</p>
+                        </div>
+                        <ul class="timeline-list" id="urgent-checklist-list">
+                            <li>-</li>
+                        </ul>
+                    </article>
+
+                    <div class="summary-grid">
+                        <article class="summary-item">
+                            <span data-i18n="expected_specialty">التخصص المتوقع</span>
+                            <strong id="report-specialty">-</strong>
+                        </article>
+
+                        <article class="summary-item">
+                            <span data-i18n="risk_level">درجة الخطورة</span>
+                            <strong id="report-risk">-</strong>
+                        </article>
+
+                        <article class="summary-item">
+                            <span data-i18n="next_step">الخطوة التالية</span>
+                            <strong id="report-next-step">-</strong>
+                        </article>
+
+                        <article class="summary-item summary-item-meter">
+                            <span data-i18n="confidence">درجة الثقة</span>
+                            <strong id="report-confidence-text">-</strong>
+                            <div class="confidence-meter">
+                                <div class="confidence-meter-bar" id="confidence-meter-bar"></div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="doc-grid">
+                        <article class="doc-card">
+                            <h3 data-i18n="possible_condition">المرض المحتمل</h3>
+                            <p id="report-possible-condition">-</p>
+                        </article>
+
+                        <article class="doc-card">
+                            <h3 data-i18n="chief_complaint">الشكوى الرئيسية</h3>
+                            <p id="report-complaint">-</p>
+                        </article>
+
+                        <article class="doc-card">
+                            <h3 data-i18n="case_summary">وصف مختصر للحالة</h3>
+                            <p id="report-symptoms">-</p>
+                        </article>
+
+                        <article class="doc-card">
+                            <h3 data-i18n="clinical_brief">المكان والشدة والمدة</h3>
+                            <p id="report-clinical-brief">-</p>
+                        </article>
+
+                        <article class="doc-card">
+                            <h3 data-i18n="red_flags">الأعراض المصاحبة والعلامات الإنذارية</h3>
+                            <p id="report-red-flags">-</p>
+                        </article>
+
+                        <article class="doc-card">
+                            <h3 data-i18n="history">التاريخ المرضي المختصر</h3>
+                            <p id="report-history">-</p>
+                        </article>
+
+                        <article class="doc-card">
+                            <h3 data-i18n="alternative_specialty">التخصص البديل القريب</h3>
+                            <p id="report-alt-specialty">-</p>
+                        </article>
+
+                        <article class="doc-card">
+                            <h3 data-i18n="confidence_note">ملاحظة الثقة</h3>
+                            <p id="report-confidence-note">-</p>
+                        </article>
+
+                        <article class="doc-card">
+                            <h3 data-i18n="doctor_note">ملاحظة للطبيب</h3>
+                            <p id="report-send-note">-</p>
+                        </article>
+                    </div>
+
+                    <article class="doc-card doc-card-wide">
+                        <h3 data-i18n="timeline">الخط الزمني</h3>
+                        <ul class="timeline-list" id="timeline-list">
+                            <li>-</li>
+                        </ul>
+                        <div class="case-timeline-visual" id="report-case-timeline"></div>
+                    </article>
+
+                    <article class="doc-card doc-card-wide">
+                        <div class="panel-header">
+                            <h3 id="report-audit-title">أثر أسئلة المتابعة</h3>
+                            <p id="report-audit-intro">هذا التسلسل يوضح كيف أثرت الإجابات على الصورة النهائية.</p>
+                        </div>
+                        <ul class="timeline-list" id="follow-up-audit-list">
+                            <li>-</li>
+                        </ul>
+                    </article>
+
+                    <article class="doc-card doc-card-wide" id="report-attachments-card">
+                        <h3>المرفقات المرفوعة</h3>
+                        <div class="attachments-grid" id="report-attachments-grid"></div>
+                    </article>
+
+                    <article class="doc-card doc-card-wide">
+                        <div class="panel-header">
+                            <h3>ما الذي اتضح بعد أسئلة المتابعة؟</h3>
+                            <p id="report-refinement-summary">-</p>
+                        </div>
+                    </article>
+
+                    <article class="doc-card doc-card-wide">
+                        <div class="panel-header">
+                            <h3>لماذا لم يبقَ التخصص البديل هو الأقرب؟</h3>
+                            <p id="report-why-not-alt">-</p>
+                        </div>
+                    </article>
+
+                    <article class="doc-card doc-card-wide">
+                        <div class="panel-header">
+                            <h3 id="report-doctor-mode-title">ملخص مختصر بوضع الطبيب</h3>
+                            <p id="report-doctor-mode-summary">-</p>
+                        </div>
+                    </article>
+
+                    <article class="doc-card doc-card-wide case-management-card">
+                        <div class="panel-header">
+                            <h3 id="case-management-title">سير المراجعة والمتابعة</h3>
+                            <p id="case-management-text">حدد حالة المراجعة وموعد المتابعة محليًا حتى تبقى الجلسة واضحة عند الرجوع إليها.</p>
+                        </div>
+                        <div class="case-management-grid">
+                            <div class="case-status-block">
+                                <span class="form-helper" id="case-status-label">حالة المراجعة</span>
+                                <div class="case-status-group">
+                                    <button type="button" class="case-status-btn" data-case-status="new">جديدة</button>
+                                    <button type="button" class="case-status-btn" data-case-status="reviewed">تمت المراجعة</button>
+                                    <button type="button" class="case-status-btn" data-case-status="follow_up">تحتاج متابعة</button>
+                                    <button type="button" class="case-status-btn" data-case-status="closed">مغلقة</button>
+                                </div>
+                            </div>
+                            <label class="dashboard-filter case-field" for="case-follow-up-date">
+                                <span id="case-follow-up-date-label">موعد المتابعة</span>
+                                <input type="date" id="case-follow-up-date" class="form-control">
+                            </label>
+                            <label class="dashboard-filter case-field" for="case-follow-up-note">
+                                <span id="case-follow-up-note-label">ملاحظة متابعة مختصرة</span>
+                                <textarea id="case-follow-up-note" class="feedback-textarea" rows="3" placeholder="اكتب ملاحظة متابعة قصيرة"></textarea>
+                            </label>
+                            <label class="consent-check case-inline-check">
+                                <input type="checkbox" id="case-attachments-reviewed">
+                                <span id="case-attachments-reviewed-label">تمت مراجعة المرفقات</span>
+                            </label>
+                            <label class="consent-check case-inline-check">
+                                <input type="checkbox" id="case-urgent-ack">
+                                <span id="case-urgent-ack-label">تمت قراءة تنبيه الأولوية</span>
+                            </label>
+                            <div class="feedback-actions">
+                                <button type="button" class="button button-secondary" id="save-case-management-btn">حفظ حالة المراجعة</button>
+                                <span class="feedback-status" id="case-management-status"></span>
+                            </div>
+                            <p class="case-management-summary" id="case-management-summary">-</p>
+                        </div>
+                    </article>
+
+                    <article class="doc-card doc-card-wide doctor-note-editor-card">
+                        <div class="panel-header">
+                            <h3 id="doctor-note-editor-title">ملاحظات الطبيب أو المشرف</h3>
+                            <p id="doctor-note-editor-text">يمكنك كتابة ملاحظة مختصرة لتبقى مرتبطة بهذه الجلسة عند فتحها لاحقًا.</p>
+                        </div>
+                        <textarea id="doctor-note-editor" class="feedback-textarea" rows="4" placeholder="اكتب ملاحظة طبية مختصرة أو تعليمات متابعة"></textarea>
+                        <div class="feedback-actions">
+                            <button type="button" class="button button-secondary" id="save-doctor-note-btn">حفظ الملاحظة</button>
+                            <button type="button" class="button button-secondary" id="clear-doctor-note-btn">مسح</button>
+                            <span class="feedback-status" id="doctor-note-status"></span>
+                        </div>
+                    </article>
+
+                    <article class="doc-card doc-card-wide feedback-card" id="report-feedback-card">
+                        <div class="panel-header">
+                            <h3>تقييم فائدة الملخص</h3>
+                            <p>سيساعد هذا التقييم في تحسين الصياغة وترتيب النتائج داخل الجهاز نفسه.</p>
+                        </div>
+                        <div class="feedback-options" id="report-feedback-options">
+                            <button type="button" class="feedback-btn" data-feedback-value="helpful">مفيد</button>
+                            <button type="button" class="feedback-btn" data-feedback-value="partly_helpful">مفيد جزئيًا</button>
+                            <button type="button" class="feedback-btn" data-feedback-value="not_helpful">غير كافٍ</button>
+                        </div>
+                        <textarea id="report-feedback-comment" class="feedback-textarea" rows="3" placeholder="ملاحظة اختيارية للطبيب أو المستخدم"></textarea>
+                        <div class="feedback-actions">
+                            <button type="button" class="button button-secondary" id="report-feedback-save">حفظ التقييم</button>
+                            <span class="feedback-status" id="report-feedback-status"></span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const reportLang =
+            new URLSearchParams(window.location.search).get("lang") ||
+            localStorage.getItem("medika-home-language-v1") ||
+            "ar";
+
+        const reportCopy = {
+            ar: {
+                brand_subtitle: "ملخص الطبيب",
+                nav_about: "عن النظام",
+                nav_features: "المزايا",
+                nav_team: "الفريق",
+                nav_contact: "تواصل معنا",
+                back_chat: "العودة للشات",
+                report_badge: "صفحة مستقلة للطبيب",
+                report_title: "ملخص الحالة للطبيب",
+                report_description: "ملخص واضح ومختصر للحالة الطبية يتضمن أهم النتائج والتوصيات والخطوة التالية.",
+                copy_report: "نسخ التقرير",
+                print_pdf: "تصدير PDF / طباعة",
+                tab_report: "ملخص الطبيب",
+                tab_decision: "تفسير القرار",
+                tab_tips: "إرشادات داعمة",
+                empty_title: "لا يوجد تقرير جاهز بعد",
+                empty_text: "ابدأ الجلسة من صفحة الشات أولًا، وبعد إكمال التقييم سيظهر التقرير هنا بشكل تلقائي.",
+                go_chat: "اذهب إلى الشات",
+                expected_specialty: "التخصص المتوقع",
+                risk_level: "درجة الخطورة",
+                next_step: "الخطوة التالية",
+                confidence: "درجة الثقة",
+                possible_condition: "المرض المحتمل",
+                chief_complaint: "الشكوى الرئيسية",
+                case_summary: "وصف مختصر للحالة",
+                clinical_brief: "المكان والشدة والمدة",
+                red_flags: "الأعراض المصاحبة والعلامات الإنذارية",
+                history: "التاريخ المرضي المختصر",
+                alternative_specialty: "التخصص البديل القريب",
+                confidence_note: "ملاحظة الثقة",
+                doctor_note: "ملاحظة للطبيب",
+                timeline: "الخط الزمني",
+                title: "Medika AI | ملخص الطبيب"
+            },
+            en: {
+                brand_subtitle: "Doctor Summary",
+                nav_about: "About",
+                nav_features: "Features",
+                nav_team: "Team",
+                nav_contact: "Contact",
+                back_chat: "Back to Chat",
+                report_badge: "Separate doctor page",
+                report_title: "Doctor Case Summary",
+                report_description: "A clear and concise summary of the medical case, including key results and the next recommended step.",
+                copy_report: "Copy Report",
+                print_pdf: "Export PDF / Print",
+                tab_report: "Doctor Summary",
+                tab_decision: "Decision Explanation",
+                tab_tips: "Supportive Care",
+                empty_title: "No report is ready yet",
+                empty_text: "Start the session from the chat page first. After completing the assessment, the report will appear here automatically.",
+                go_chat: "Go to Chat",
+                expected_specialty: "Expected specialty",
+                risk_level: "Risk level",
+                next_step: "Next step",
+                confidence: "Confidence",
+                possible_condition: "Possible condition",
+                chief_complaint: "Chief complaint",
+                case_summary: "Short case summary",
+                clinical_brief: "Location, severity, and duration",
+                red_flags: "Associated symptoms and red flags",
+                history: "Brief medical history",
+                alternative_specialty: "Alternative specialty",
+                confidence_note: "Confidence note",
+                doctor_note: "Note for the doctor",
+                timeline: "Timeline",
+                title: "Medika AI | Doctor Summary"
+            }
+        };
+
+        const activeCopy = reportLang === "en" ? reportCopy.en : reportCopy.ar;
+
+        document.documentElement.lang = reportLang === "en" ? "en" : "ar";
+        document.documentElement.dir = reportLang === "en" ? "ltr" : "rtl";
+        document.body.classList.toggle("is-ltr", reportLang === "en");
+        document.title = activeCopy.title;
+
+        document.querySelectorAll("[data-i18n]").forEach((node) => {
+            const key = node.dataset.i18n;
+            if (activeCopy[key]) {
+                node.textContent = activeCopy[key];
+            }
+        });
+
+        document.querySelectorAll('a[href="chat.html"]').forEach((link) => {
+            link.href = `chat.html?lang=${reportLang}`;
+        });
+
+        document.querySelectorAll('a[href="report.html"]').forEach((link) => {
+            link.href = `report.html?lang=${reportLang}`;
+        });
+
+        document.querySelectorAll('a[href="decision.html"]').forEach((link) => {
+            link.href = `decision.html?lang=${reportLang}`;
+        });
+
+        document.querySelectorAll('a[href="integrative.html"]').forEach((link) => {
+            link.href = `integrative.html?lang=${reportLang}`;
+        });
+    </script>
+
+    <script src="app-config.js?v=20260502h"></script>
+    <script src="script.js?v=20260502h"></script>
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Medika AI منصة عربية للتوجيه الطبي الأولي تقدم تجربة أوضح، أسئلة متابعة منظمة، ونتائج قابلة للفهم للمستخدم والطبيب.">
+    <meta name="theme-color" content="#7b183f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Medika AI">
+    <script>
+        try {
+            const storedTheme = localStorage.getItem("medika-theme-v1");
+            if (storedTheme === "dark" || storedTheme === "light") {
+                document.documentElement.dataset.theme = storedTheme;
+            }
+        } catch (error) {
+            // Ignore early theme bootstrap failures.
+        }
+    </script>
+    <title>Medika AI | التوجيه الطبي الذكي</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/app-icon-192.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20260502h">
+</head>
+<body class="site-body home-page">
+    <a href="#main-content" class="skip-link" data-i18n="skipToContent">تجاوز إلى المحتوى</a>
+    <div class="page-shell">
+        <header class="site-header">
+            <nav class="navbar container py-3 px-4" aria-label="التنقل الرئيسي">
+                <a href="#home" class="logo d-inline-flex align-items-center text-decoration-none">
+                    <span class="logo-mark"><i class="fas fa-heart-pulse" aria-hidden="true"></i></span>
+                    <span>
+                        <strong>Medika AI</strong>
+                        <small data-i18n="brand_tagline">التوجيه الطبي الذكي</small>
+                    </span>
+                </a>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="فتح وإغلاق القائمة">
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-panel" id="nav-menu">
+                    <ul class="nav-links mb-0">
+                        <li><a href="#home" data-i18n="nav_home">الرئيسية</a></li>
+                        <li><a href="#about" data-i18n="nav_about">عن النظام</a></li>
+                        <li><a href="#features" data-i18n="nav_features">المزايا</a></li>
+                        <li><a href="#team" data-i18n="nav_team">الفريق</a></li>
+                        <li><a href="#contact" data-i18n="nav_contact">تواصل معنا</a></li>
+                    </ul>
+                    <div class="nav-actions">
+                        <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">
+                            <i class="fas fa-globe" aria-hidden="true"></i>
+                            <span id="lang-toggle-label">English</span>
+                        </button>
+                        <a href="chat.html" class="nav-cta text-decoration-none rounded-pill" data-i18n="nav_start">ابدأ الاستشارة</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main id="main-content">
+            <section id="home" class="hero-section">
+                <div class="container">
+                    <div class="hero-shell reveal">
+                        <div class="hero-layout">
+                            <div class="hero-copy hero-copy-premium">
+                                <span class="hero-badge">
+                                    <span class="hero-badge-line" aria-hidden="true"></span>
+                                    <span data-i18n="hero_badge">منصة عربية أوضح للتوجيه الطبي الأولي</span>
+                                </span>
+                                <h1 data-i18n="hero_title">صف الشكوى بطريقة بسيطة، وخذ توجيهًا مرتبًا يبدو وكأنه جزء من منتج طبي حقيقي.</h1>
+                                <p class="hero-text mb-0" data-i18n="hero_text">Medika AI يحول وصف الأعراض إلى تجربة أوضح: أسئلة متابعة قصيرة، تخصص طبي أقرب، درجة خطورة مفهومة، ثم تقرير مرتب يمكن عرضه على الطبيب بدل النتائج المبعثرة أو الكلام الغامض.</p>
+
+                                <div class="hero-actions">
+                                    <a href="chat.html" class="button button-primary text-decoration-none rounded-pill" data-i18n="hero_cta_primary">ابدأ الاستشارة الآن</a>
+                                    <a href="#features" class="button button-secondary text-decoration-none rounded-pill" data-i18n="hero_cta_secondary">شاهد المزايا</a>
+                                </div>
+
+                                <div class="hero-trust-strip hero-trust-strip-premium" aria-label="نقاط القوة">
+                                    <span><i class="fas fa-language" aria-hidden="true"></i><span data-i18n="hero_trust_1">عربية وواضحة</span></span>
+                                    <span><i class="fas fa-route" aria-hidden="true"></i><span data-i18n="hero_trust_2">مسار قصير ومنظم</span></span>
+                                    <span><i class="fas fa-file-waveform" aria-hidden="true"></i><span data-i18n="hero_trust_3">تقرير جاهز للطبيب</span></span>
+                                </div>
+
+                                <div class="hero-metrics" aria-label="مؤشرات سريعة">
+                                    <article class="hero-metric-card">
+                                        <strong>3</strong>
+                                        <span data-i18n="hero_metric_1">خطوات فقط من الشكوى إلى النتيجة</span>
+                                    </article>
+                                    <article class="hero-metric-card">
+                                        <strong>1</strong>
+                                        <span data-i18n="hero_metric_2">واجهة واحدة لمسار واضح ومفهوم</span>
+                                    </article>
+                                    <article class="hero-metric-card">
+                                        <strong>100%</strong>
+                                        <span data-i18n="hero_metric_3">تجربة مصممة للقراءة العربية</span>
+                                    </article>
+                                </div>
+
+                                <div class="hero-mini-flow" aria-label="آلية العمل">
+                                    <article class="hero-mini-step">
+                                        <strong>1</strong>
+                                        <div>
+                                            <span data-i18n="hero_step_1_title">اكتب الأعراض</span>
+                                            <p data-i18n="hero_step_1_text">باللغة العربية وبالطريقة التي تتكلم بها عادة.</p>
+                                        </div>
+                                    </article>
+                                    <article class="hero-mini-step">
+                                        <strong>2</strong>
+                                        <div>
+                                            <span data-i18n="hero_step_2_title">أجب عن أسئلة قصيرة</span>
+                                            <p data-i18n="hero_step_2_text">حتى يبني النظام صورة أوضح للحالة.</p>
+                                        </div>
+                                    </article>
+                                    <article class="hero-mini-step">
+                                        <strong>3</strong>
+                                        <div>
+                                            <span data-i18n="hero_step_3_title">استلم التوجيه</span>
+                                            <p data-i18n="hero_step_3_text">تخصص متوقع وخطوة متابعة وملف منظم.</p>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <p class="hero-disclaimer" data-i18n="hero_disclaimer">هذه الأداة مخصصة للتوجيه الأولي فقط، ولا تغني عن مراجعة الطبيب أو الطوارئ عند وجود أعراض شديدة أو متفاقمة أو علامات إنذارية.</p>
+                            </div>
+
+                            <aside class="hero-preview" aria-label="معاينة تجربة المنصة">
+                                <div class="hero-preview-orb hero-preview-orb-one" aria-hidden="true"></div>
+                                <div class="hero-preview-orb hero-preview-orb-two" aria-hidden="true"></div>
+
+                                <div class="hero-visual-showcase" aria-hidden="true">
+                                    <figure class="hero-image-card hero-image-card-main">
+                                        <img src="images/hero-clinician.svg" alt="">
+                                    </figure>
+
+                                    <div class="hero-image-stack">
+                                        <figure class="hero-image-card hero-image-card-secondary">
+                                            <img src="images/hero-dashboard.svg" alt="">
+                                        </figure>
+
+                                        <div class="hero-insight-card">
+                                            <span class="hero-insight-chip" data-i18n="hero_insight_1">عرض أنظف</span>
+                                            <span class="hero-insight-chip" data-i18n="hero_insight_2">أسئلة أذكى</span>
+                                            <span class="hero-insight-chip" data-i18n="hero_insight_3">تقرير جاهز</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="preview-device">
+                                    <div class="preview-topbar">
+                                        <span class="preview-live-dot"></span>
+                                        <span data-i18n="preview_live">جلسة توجيه حية</span>
+                                        <small>Medika AI</small>
+                                    </div>
+
+                                    <div class="preview-chat">
+                                        <article class="preview-bubble preview-bubble-user" data-i18n="preview_user_message">
+                                            عندي ألم معدة مع غثيان من الصباح
+                                        </article>
+                                        <article class="preview-bubble preview-bubble-bot" data-i18n="preview_bot_message">
+                                            سنرتب الحالة بسرعة. هل الألم يزداد؟ وهل يوجد قيء أو حرارة؟
+                                        </article>
+                                    </div>
+
+                                    <div class="preview-result-card">
+                                        <div class="preview-result-head">
+                                            <span class="preview-kicker" data-i18n="preview_result_kicker">النتيجة الأولية</span>
+                                            <span class="preview-risk" data-i18n="preview_result_risk">متوسط</span>
+                                        </div>
+                                        <h3 data-i18n="preview_specialty">الجهاز الهضمي</h3>
+                                        <p data-i18n="preview_result_text">التخصص الأقرب بناءً على الشكوى والإجابات المرافقة مع حاجة إلى متابعة طبية منظمة.</p>
+                                        <ul>
+                                            <li data-i18n="preview_result_point_1">أسئلة قصيرة ومباشرة</li>
+                                            <li data-i18n="preview_result_point_2">تفسير واضح للقرار</li>
+                                            <li data-i18n="preview_result_point_3">تقرير يمكن عرضه على الطبيب</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="preview-report-card">
+                                        <div class="preview-report-title">
+                                            <i class="fas fa-file-medical" aria-hidden="true"></i>
+                                            <span data-i18n="preview_report_title">ملخص الطبيب</span>
+                                        </div>
+                                        <div class="preview-report-lines">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="hero-proof-section">
+                <div class="container hero-proof-grid reveal">
+                    <article class="hero-proof-card">
+                        <span class="hero-proof-label" data-i18n="proof_label_1">وضوح الفكرة</span>
+                        <h3 data-i18n="proof_title_1">الزائر يفهم المنتج من أول شاشة</h3>
+                        <p data-i18n="proof_text_1">بدل صفحة نصية فقط، أصبح هناك شرح بصري مباشر يوضح شكل التجربة والنتيجة النهائية داخل المنتج.</p>
+                    </article>
+                    <article class="hero-proof-card">
+                        <span class="hero-proof-label" data-i18n="proof_label_2">قيمة حقيقية</span>
+                        <h3 data-i18n="proof_title_2">النتيجة ليست اسم تخصص فقط</h3>
+                        <p data-i18n="proof_text_2">المستخدم يحصل على تخصص متوقع، مستوى خطورة، خطوة متابعة، ثم صفحات مستقلة للتقرير والتفسير والطب التكميلي.</p>
+                    </article>
+                    <article class="hero-proof-card">
+                        <span class="hero-proof-label" data-i18n="proof_label_3">انطباع مهني</span>
+                        <h3 data-i18n="proof_title_3">تصميم يرفع الثقة قبل أول نقرة</h3>
+                        <p data-i18n="proof_text_3">كل جزء في الصفحة الآن يوضح أن المشروع منظم، مقصود، وأسهل للفهم على المستخدم والطبيب معًا.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="hero-journey-section">
+                <div class="container hero-journey-panel reveal">
+                    <div class="hero-journey-copy">
+                        <span class="eyebrow" data-i18n="journey_eyebrow">رحلة المستخدم</span>
+                        <h2 data-i18n="journey_title">من الشكوى إلى التقرير في مسار واحد متسلسل.</h2>
+                        <p data-i18n="journey_text">صممنا الصفحة الرئيسية لتقود الزائر ذهنيًا إلى ما سيحدث لاحقًا داخل النظام، بحيث لا تبقى الفكرة نظرية بل تصبح مرئية ومفهومة من أول نظرة.</p>
+                    </div>
+                    <div class="hero-journey-steps">
+                        <article class="hero-journey-step">
+                            <strong>01</strong>
+                            <h3 data-i18n="journey_step_1_title">وصف الحالة</h3>
+                            <p data-i18n="journey_step_1_text">المستخدم يكتب الشكوى باللغة العربية الطبيعية كما يتحدث عادة.</p>
+                        </article>
+                        <article class="hero-journey-step">
+                            <strong>02</strong>
+                            <h3 data-i18n="journey_step_2_title">أسئلة متابعة</h3>
+                            <p data-i18n="journey_step_2_text">النظام يرتب أسئلة قصيرة تبني صورة أوضح عن الشدة والمخاطر.</p>
+                        </article>
+                        <article class="hero-journey-step">
+                            <strong>03</strong>
+                            <h3 data-i18n="journey_step_3_title">نتيجة قابلة للفهم</h3>
+                            <p data-i18n="journey_step_3_text">التخصص المتوقع والخطوة التالية يظهران مع تفسير وتقرير نهائي منظم.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="home-showcase-section">
+                <div class="container home-showcase-grid reveal">
+                    <div class="home-showcase-copy">
+                        <span class="eyebrow" data-i18n="showcase_eyebrow">داخل المنصة</span>
+                        <h2 data-i18n="showcase_title">التجربة ليست مجرد شات، بل طبقة قرار كاملة.</h2>
+                        <p data-i18n="showcase_text">الواجهة الجديدة تشرح قيمة المنتج قبل الضغط على أي زر: محادثة مرتبة، نتيجة قابلة للفهم، ملخص للطبيب، ثم صفحات مستقلة لكل جزء مهم من التجربة.</p>
+                        <ul class="home-showcase-list">
+                            <li data-i18n="showcase_list_1">مسار واحد واضح من أول وصف إلى الخطوة التالية.</li>
+                            <li data-i18n="showcase_list_2">فصل ذكي بين الشات، التقرير، التفسير، والطب التكميلي.</li>
+                            <li data-i18n="showcase_list_3">لغة بصرية أنظف تعطي انطباعًا أكثر مهنية وثقة.</li>
+                        </ul>
+                    </div>
+                    <div class="home-showcase-stack">
+                        <article class="showcase-card showcase-card-primary">
+                            <span class="showcase-card-label" data-i18n="showcase_card_1_label">واجهة المحادثة</span>
+                            <h3 data-i18n="showcase_card_1_title">أسئلة قصيرة تقلل الفوضى</h3>
+                            <p data-i18n="showcase_card_1_text">كل سؤال مصمم ليضيف قيمة فعلية إلى القرار بدل إغراق المستخدم بنموذج طويل ومربك.</p>
+                        </article>
+                        <article class="showcase-card">
+                            <span class="showcase-card-label" data-i18n="showcase_card_2_label">طبقة القرار</span>
+                            <h3 data-i18n="showcase_card_2_title">نتيجة مفهومة وليست غامضة</h3>
+                            <p data-i18n="showcase_card_2_text">التخصص المتوقع، مستوى الخطورة، والخطوة العملية التالية تظهر بصياغة يمكن فهمها بسرعة.</p>
+                        </article>
+                        <article class="showcase-card">
+                            <span class="showcase-card-label" data-i18n="showcase_card_3_label">الملف النهائي</span>
+                            <h3 data-i18n="showcase_card_3_title">صفحات جاهزة للمراجعة والعرض</h3>
+                            <p data-i18n="showcase_card_3_text">بدل تجميع كل شيء في مكان واحد، تم توزيع المخرجات على صفحات مستقلة أكثر ترتيبًا وسهولة.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section section-tight">
+                <div class="container workflow-strip reveal">
+                    <article class="workflow-step">
+                        <span class="workflow-number">1</span>
+                        <h3 data-i18n="workflow_title_1">بداية بسيطة</h3>
+                        <p data-i18n="workflow_text_1">الواجهة مصممة لتوصلك مباشرة إلى الهدف بدون أي عناصر مشتتة أو غير مفهومة.</p>
+                    </article>
+                    <article class="workflow-step">
+                        <span class="workflow-number">2</span>
+                        <h3 data-i18n="workflow_title_2">تدرج واضح</h3>
+                        <p data-i18n="workflow_text_2">كل خطوة في المسار مبنية لتكون أوضح من التي قبلها، من الشكوى حتى التقرير النهائي.</p>
+                    </article>
+                    <article class="workflow-step">
+                        <span class="workflow-number">3</span>
+                        <h3 data-i18n="workflow_title_3">مخرجات جاهزة</h3>
+                        <p data-i18n="workflow_text_3">يمكنك التنقل بين صفحات مستقلة للتقرير الطبي، التفسير، والطب البديل حسب الحاجة.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="about" class="section section-soft">
+                <div class="container section-heading reveal text-center">
+                    <span class="eyebrow" data-i18n="about_eyebrow">عن النظام</span>
+                    <h2 data-i18n="about_title">فكرة أوضح وتجربة أنضف.</h2>
+                    <p data-i18n="about_text">هدف Medika AI هو جعل التوجيه الطبي الأولي باللغة العربية أكثر وضوحًا، وأكثر هدوءًا، وأسهل على المستخدم والطبيب في نفس الوقت.</p>
+                </div>
+                <div class="container story-grid">
+                    <article class="story-card reveal">
+                        <div class="icon-badge"><i class="fas fa-brain" aria-hidden="true"></i></div>
+                        <h3 data-i18n="about_card_1_title">فهم الاستفسار العربي</h3>
+                        <p data-i18n="about_card_1_text">يتعامل مع الأعراض كما يكتبها المستخدم بطريقة طبيعية، بدون حاجة إلى صياغة معقدة.</p>
+                    </article>
+                    <article class="story-card reveal">
+                        <div class="icon-badge"><i class="fas fa-shield-heart" aria-hidden="true"></i></div>
+                        <h3 data-i18n="about_card_2_title">توجيه آمن</h3>
+                        <p data-i18n="about_card_2_text">يعطي توصية أولية فقط مع إبراز الحالات التي يجب ألا تؤخر التقييم الطبي المباشر.</p>
+                    </article>
+                    <article class="story-card reveal">
+                        <div class="icon-badge"><i class="fas fa-file-medical" aria-hidden="true"></i></div>
+                        <h3 data-i18n="about_card_3_title">مخرجات منظمة</h3>
+                        <p data-i18n="about_card_3_text">كل نتيجة تتحول إلى صفحات مرتبة: تقرير للطبيب، تفسير للقرار، وإرشادات تكاملية عند الحاجة.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="features" class="section">
+                <div class="container feature-layout">
+                    <div class="feature-copy reveal">
+                        <span class="eyebrow" data-i18n="features_eyebrow">المزايا</span>
+                        <h2 data-i18n="features_title">واجهة أنظف، قراءة أسرع، وانطباع أكثر مهنية.</h2>
+                        <p data-i18n="features_text">تم إعادة ترتيب الصفحة بحيث تركز على الفكرة الأساسية والنتيجة الفعلية بدل أي بلوكات شكلية غير مفيدة.</p>
+                    </div>
+                    <div class="feature-grid">
+                        <article class="feature-card reveal">
+                            <h3 data-i18n="features_card_1_title">دخول مباشر</h3>
+                            <p data-i18n="features_card_1_text">زر البداية واضح ويقودك مباشرة إلى الشات دون التباس.</p>
+                        </article>
+                        <article class="feature-card reveal">
+                            <h3 data-i18n="features_card_2_title">تنقل بين صفحات</h3>
+                            <p data-i18n="features_card_2_text">فصلنا التقرير والتفسير والطب البديل إلى صفحات مستقلة حتى تكون القراءة أرتب.</p>
+                        </article>
+                        <article class="feature-card reveal">
+                            <h3 data-i18n="features_card_3_title">تجربة عربية</h3>
+                            <p data-i18n="features_card_3_text">كل النصوص والهيراركية البصرية مبنية لتناسب القراءة العربية بشكل أفضل.</p>
+                        </article>
+                        <article class="feature-card reveal">
+                            <h3 data-i18n="features_card_4_title">تواصل واضح</h3>
+                            <p data-i18n="features_card_4_text">إيميلات المشروع والتواصل موجودة بوضوح في الواجهة الرئيسية وقسم التواصل.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="team" class="section section-soft">
+                <div class="container section-heading reveal">
+                    <span class="eyebrow" data-i18n="team_eyebrow">الفريق</span>
+                    <h2 data-i18n="team_title">فريق المشروع</h2>
+                    <p data-i18n="team_text">الفريق عمل على الدمج بين التوجيه الطبي الأولي والتجربة البصرية النظيفة في واجهة عربية مبسطة.</p>
+                </div>
+                <div class="container team-grid">
+                    <article class="team-card reveal">
+                        <div class="team-photo-wrap"><img src="images/rania.jpg.jpeg" alt="Portrait of Rania Abu Shaqra" class="team-photo img-fluid"></div>
+                        <h3>Rania Abu Shaqra</h3>
+                        <p data-i18n="team_role_1">علوم البيانات والذكاء الاصطناعي</p>
+                    </article>
+                    <article class="team-card reveal">
+                        <div class="team-photo-wrap"><img src="images/aya.jpg.jpeg" alt="Portrait of Aya Nairoukh" class="team-photo img-fluid"></div>
+                        <h3>Aya Nairoukh</h3>
+                        <p data-i18n="team_role_2">علوم البيانات والذكاء الاصطناعي</p>
+                    </article>
+                    <article class="team-card reveal">
+                        <div class="team-photo-wrap"><img src="images/razan.jpg.jpeg" alt="Portrait of Razan Barhoumeh" class="team-photo img-fluid"></div>
+                        <h3>Razan Barhoumeh</h3>
+                        <p data-i18n="team_role_3">علوم الحاسوب</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="contact" class="section">
+                <div class="container contact-layout">
+                    <div class="contact-copy reveal">
+                        <span class="eyebrow" data-i18n="contact_eyebrow">تواصل معنا</span>
+                        <h2 data-i18n="contact_title">كل شيء واضح حتى في التواصل.</h2>
+                        <p data-i18n="contact_text">إذا أردتِ إرسال ملاحظات على التجربة أو متابعة تطوير المشروع أو طلب نسخة العرض، ستجدين كل وسائل التواصل بشكل مرتب هنا.</p>
+                        <div class="contact-points">
+                            <div>
+                                <span data-i18n="contact_point_1_label">إيميل المشروع</span>
+                                <strong><a href="mailto:project@medika.example">project@medika.example</a></strong>
+                            </div>
+                            <div>
+                                <span data-i18n="contact_point_2_label">إيميل التواصل</span>
+                                <strong><a href="mailto:hello@medika.example">hello@medika.example</a></strong>
+                            </div>
+                            <div>
+                                <span data-i18n="contact_point_3_label">اسم المنصة</span>
+                                <strong>Medika AI</strong>
+                            </div>
+                            <div>
+                                <span data-i18n="contact_point_4_label">الخدمة</span>
+                                <strong data-i18n="contact_point_4_value">توجيه طبي أولي باللغة العربية</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form reveal" action="#" method="post">
+                        <div class="form-grid">
+                            <label>
+                                <span data-i18n="contact_form_name_label">الاسم الكامل</span>
+                                <input type="text" name="name" class="form-control" placeholder="أدخل اسمك" data-i18n-placeholder="contact_form_name_placeholder" required>
+                            </label>
+                            <label>
+                                <span data-i18n="contact_form_email_label">البريد الإلكتروني</span>
+                                <input type="email" name="email" class="form-control" placeholder="name@example.com" data-i18n-placeholder="contact_form_email_placeholder" required>
+                            </label>
+                        </div>
+                        <label>
+                            <span data-i18n="contact_form_message_label">الرسالة</span>
+                            <textarea name="message" rows="6" class="form-control" placeholder="اكتب رسالتك هنا." data-i18n-placeholder="contact_form_message_placeholder" required></textarea>
+                        </label>
+                        <button type="submit" class="button button-primary" data-i18n="contact_form_submit">إرسال الرسالة</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container footer-content">
+                <p>Medika AI</p>
+                <p>&copy; <span id="year">2026</span> <span data-i18n="footer_tagline">واجهة التوجيه الطبي الذكي باللغة العربية</span></p>
+            </div>
+        </footer>
+    </div>
+    <script src="app-config.js?v=20260502h"></script>
+    <script src="script.js?v=20260502h"></script>
+</body>
+</html>

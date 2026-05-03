@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="واجهة الاستشارة الذكية في Medika AI لبناء مسار منظم من الشكوى حتى التقرير الطبي والصفحات التوضيحية.">
+    <meta name="theme-color" content="#7b183f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Medika AI">
+    <script>
+        try {
+            const storedTheme = localStorage.getItem("medika-theme-v1");
+            if (storedTheme === "dark" || storedTheme === "light") {
+                document.documentElement.dataset.theme = storedTheme;
+            }
+        } catch (error) {
+            // Ignore early theme bootstrap failures.
+        }
+    </script>
+    <title>Medika AI | الاستشارة الذكية</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/app-icon-192.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <script>
+        try {
+            const lang = new URLSearchParams(window.location.search).get("lang");
+            if (lang === "en" || lang === "ar") {
+                localStorage.setItem("medika-home-language-v1", lang);
+                document.documentElement.lang = lang;
+                document.documentElement.dir = lang === "en" ? "ltr" : "rtl";
+            }
+        } catch (error) {
+            // Ignore bootstrap language errors and let the main script continue.
+        }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=20260502h">
+</head>
+<body class="site-body chat-page">
+    <a href="#main-content" class="skip-link">تجاوز إلى المحتوى</a>
+    <div class="page-shell">
+        <header class="site-header">
+            <nav class="navbar container py-3 px-4" aria-label="التنقل الرئيسي">
+                <a href="index.html#home" class="logo d-inline-flex align-items-center text-decoration-none">
+                    <span class="logo-mark"><i class="fas fa-heart-pulse" aria-hidden="true"></i></span>
+                    <span>
+                        <strong>Medika AI</strong>
+                        <small id="chat-brand-tagline">الاستشارة الذكية</small>
+                    </span>
+                </a>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="فتح وإغلاق القائمة">
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-panel" id="nav-menu">
+                    <ul class="nav-links mb-0">
+                        <li><a href="index.html#about" id="chat-nav-about">عن النظام</a></li>
+                        <li><a href="index.html#features" id="chat-nav-features">المزايا</a></li>
+                        <li><a href="index.html#team" id="chat-nav-team">الفريق</a></li>
+                        <li><a href="index.html#contact" id="chat-nav-contact">تواصل معنا</a></li>
+                    </ul>
+                    <div class="nav-actions">
+                        <button class="lang-toggle" id="chat-lang-toggle" type="button" aria-label="Switch language">
+                            <i class="fas fa-globe" aria-hidden="true"></i>
+                            <span id="chat-lang-toggle-label">English</span>
+                        </button>
+                        <a href="index.html" class="nav-cta nav-cta-soft text-decoration-none rounded-pill" id="chat-back-home-link">العودة للرئيسية</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="chat-main" id="main-content">
+            <section class="chat-hero container reveal">
+                <div class="chat-intro compact-intro">
+                    <div class="hero-badge">
+                        <span class="hero-badge-line"></span>
+                        <span id="chat-hero-badge-text">مسار واضح من الشكوى حتى الصفحات النهائية</span>
+                    </div>
+                    <h1 id="chat-hero-title">ابدأ من هنا، واتركي الباقي على النظام.</h1>
+                    <p class="mb-0" id="chat-hero-text">هذه الصفحة مخصصة فقط للمحادثة والأسئلة والمتابعة. بعد اكتمال النتيجة ستنتقلين إلى صفحات مستقلة للتقرير الطبي، تفسير القرار، والإرشادات الداعمة عند الطلب.</p>
+                    <div class="chat-hero-highlights" aria-label="ملخص التجربة">
+                        <article class="chat-hero-highlight">
+                            <strong id="chat-highlight-1-title">أسئلة قصيرة</strong>
+                            <span id="chat-highlight-1-text">تبني الصورة خطوة بخطوة</span>
+                        </article>
+                        <article class="chat-hero-highlight">
+                            <strong id="chat-highlight-2-title">نتيجة أوضح</strong>
+                            <span id="chat-highlight-2-text">تخصص أقرب مع مستوى خطورة</span>
+                        </article>
+                        <article class="chat-hero-highlight">
+                            <strong id="chat-highlight-3-title">صفحات جاهزة</strong>
+                            <span id="chat-highlight-3-text">ملخص، تفسير، وإرشادات عند الطلب</span>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="chat-section container">
+                <div class="chat-main-grid reveal">
+                    <aside class="chat-side-panel">
+                        <div class="sidebar-card stage-card">
+                            <div class="sidebar-card-head sidebar-card-head--lead">
+                                <h2 class="sidebar-title-lg"><i class="fas fa-route sidebar-card-icon" aria-hidden="true"></i><span id="chat-stage-title">مسار الجلسة</span></h2>
+                                <span class="sidebar-helper-chip" id="chat-stage-note">5 محطات واضحة</span>
+                            </div>
+                            <div class="stage-list" id="stage-list">
+                                <div class="stage-item is-active" data-stage="complaint" id="chat-stage-complaint">1. الشكوى</div>
+                                <div class="stage-item" data-stage="questions" id="chat-stage-questions">2. أسئلة المتابعة</div>
+                                <div class="stage-item" data-stage="recommendation" id="chat-stage-recommendation">3. النتيجة</div>
+                                <div class="stage-item" data-stage="explanation" id="chat-stage-explanation">4. التفسير</div>
+                                <div class="stage-item" data-stage="tips" id="chat-stage-tips">5. إرشادات داعمة</div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card prompt-card">
+                            <div class="sidebar-card-head sidebar-card-head--lead">
+                                <h3 class="sidebar-title-md"><i class="fas fa-bolt sidebar-card-icon" aria-hidden="true"></i><span id="chat-quick-prompts-title">أمثلة سريعة</span></h3>
+                                <span class="sidebar-helper-chip" id="chat-quick-prompts-note">ابدئي من مثال قريب</span>
+                            </div>
+                            <div class="quick-prompts">
+                                <button type="button" class="quick-prompt" data-prompt-ar="أشعر بألم في الصدر مع خفقان" data-prompt-en="I feel chest pain with palpitations" data-label-ar="ألم في الصدر" data-label-en="Chest pain">ألم في الصدر</button>
+                                <button type="button" class="quick-prompt" data-prompt-ar="أعاني من صداع شديد مع زغللة" data-prompt-en="I have a severe headache with blurred vision" data-label-ar="صداع مع زغللة" data-label-en="Headache with blurred vision">صداع مع زغللة</button>
+                                <button type="button" class="quick-prompt" data-prompt-ar="عندي ألم في الكتف يزداد مع الحركة" data-prompt-en="I have shoulder pain that gets worse with movement" data-label-ar="ألم في الكتف" data-label-en="Shoulder pain">ألم في الكتف</button>
+                                <button type="button" class="quick-prompt" data-prompt-ar="عندي مغص وغثيان وانتفاخ في المعدة" data-prompt-en="I have stomach cramps with nausea and bloating" data-label-ar="ألم في المعدة" data-label-en="Stomach pain">ألم في المعدة</button>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card warning-card">
+                            <div class="sidebar-card-head sidebar-card-head--lead">
+                                <h3 class="sidebar-title-md"><i class="fas fa-shield-heart sidebar-card-icon" aria-hidden="true"></i><span id="chat-safety-title">قاعدة الأمان</span></h3>
+                            </div>
+                            <p id="chat-safety-text">عند وجود أعراض شديدة أو مفاجئة أو مهددة للحياة، يجب مراجعة الطوارئ مباشرة وعدم الاعتماد على الموقع.</p>
+                        </div>
+
+                        <div class="sidebar-card account-card">
+                            <div class="sidebar-card-head sidebar-card-head--lead">
+                                <h3 class="sidebar-title-md"><i class="fas fa-id-badge sidebar-card-icon" aria-hidden="true"></i><span id="chat-account-title">هوية الجلسة</span></h3>
+                                <span class="sidebar-helper-chip" id="chat-account-helper">تظهر في التاريخ واللوحة</span>
+                            </div>
+                            <div class="account-role-switch" id="account-role-switch" aria-label="اختيار الدور">
+                                <button type="button" class="account-role-btn is-active" data-role="patient" id="account-role-patient">مريض</button>
+                                <button type="button" class="account-role-btn" data-role="doctor" id="account-role-doctor">طبيب</button>
+                            </div>
+                            <label class="dashboard-filter account-name-field" for="account-name-input">
+                                <span id="account-name-label">الاسم الظاهر</span>
+                                <input type="text" id="account-name-input" class="form-control" placeholder="مثال: أحمد أو د. ليان" autocomplete="off">
+                            </label>
+                            <div class="account-actions">
+                                <button type="button" class="button button-secondary" id="save-account-btn">حفظ الهوية</button>
+                                <span class="feedback-status" id="account-status"></span>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card upload-card">
+                            <div class="sidebar-card-head">
+                                <h3 class="sidebar-title-md"><i class="fas fa-paperclip sidebar-card-icon" aria-hidden="true"></i><span id="chat-upload-title">مرفقات اختيارية</span></h3>
+                                <span class="sidebar-mini-note" id="chat-upload-note">تظهر في ملخص الطبيب فقط</span>
+                            </div>
+                            <div class="upload-actions">
+                                <button type="button" class="session-history-btn" id="skin-upload-btn">
+                                    <i class="fas fa-camera-retro" aria-hidden="true"></i>
+                                    <span id="skin-upload-btn-label">صورة جلدية</span>
+                                </button>
+                                <button type="button" class="session-history-btn" id="file-upload-btn">
+                                    <i class="fas fa-file-medical" aria-hidden="true"></i>
+                                    <span id="file-upload-btn-label">ملف طبي</span>
+                                </button>
+                            </div>
+                            <input type="file" id="skin-upload-input" accept="image/*" hidden>
+                            <input type="file" id="file-upload-input" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.txt,.csv,.json" hidden>
+                            <div class="attachment-list" id="attachment-list"></div>
+                        </div>
+
+                        <div class="sidebar-card session-history-card">
+                            <div class="sidebar-card-head">
+                                <h3 class="sidebar-title-md"><i class="fas fa-clock-rotate-left sidebar-card-icon" aria-hidden="true"></i><span id="chat-history-title">آخر الجلسات</span></h3>
+                                <button type="button" class="sidebar-link-btn" id="clear-history-btn">مسح</button>
+                            </div>
+                            <div class="session-history-list" id="session-history-list"></div>
+                        </div>
+
+                        <div class="sidebar-card dashboard-shortcut-card">
+                            <h3 class="sidebar-title-lg"><i class="fas fa-stethoscope sidebar-card-icon" aria-hidden="true"></i><span id="chat-dashboard-title">لوحة الطبيب</span></h3>
+                            <p id="chat-dashboard-text">عرض الجلسات المحفوظة، المؤشرات العامة، والتعليقات المحلية في مكان واحد.</p>
+                            <a href="dashboard.html" class="button button-secondary text-decoration-none" id="chat-dashboard-link">فتح اللوحة</a>
+                        </div>
+                    </aside>
+
+                    <section class="chat-card glass-card" aria-label="محادثة الاستشارة الذكية">
+                        <div class="chat-card-header">
+                            <div>
+                                <p class="assistant-label" id="chat-assistant-label">المساعد السريري</p>
+                                <h2 id="chat-session-title">جلسة التوجيه الأولي</h2>
+                            </div>
+                            <span class="chat-status-pill" id="chat-status-pill">محادثة فقط</span>
+                        </div>
+
+                        <div class="chat-session-strip" id="chat-session-strip" aria-label="ملخص الجلسة">
+                            <article class="chat-session-chip">
+                                <span id="chat-session-step-label">المسار الحالي</span>
+                                <strong id="chat-session-step-value">1. الشكوى</strong>
+                            </article>
+                            <article class="chat-session-chip">
+                                <span id="chat-session-pages-label">الصفحات الجاهزة</span>
+                                <strong id="chat-session-pages-value">0</strong>
+                            </article>
+                            <article class="chat-session-chip">
+                                <span id="chat-session-attachments-label">المرفقات</span>
+                                <strong id="chat-session-attachments-value">0</strong>
+                            </article>
+                        </div>
+
+                        <div class="emergency-banner" id="emergency-banner" hidden>
+                            <div class="emergency-banner-icon">
+                                <i class="fas fa-triangle-exclamation" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <strong id="emergency-title">تنبيه مهم</strong>
+                                <p id="emergency-text">تم رصد مؤشرات تتطلب تقييمًا طبيًا عاجلًا.</p>
+                            </div>
+                        </div>
+
+                        <div class="chat-box" id="chat-box" aria-live="polite" aria-label="سجل المحادثة">
+                            <article class="message-row bot">
+                                <div class="avatar"><i class="fas fa-robot" aria-hidden="true"></i></div>
+                                <div class="message-bubble" dir="rtl">
+                                    <span class="message-role">المساعد</span>
+                                    <p>مرحبًا بك. اكتب الشكوى كما تصفها عادة، وسأرتب معك المسار خطوة بخطوة حتى نجهز النتيجة والصفحات النهائية.</p>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div class="quick-replies-panel" id="quick-replies-panel" hidden>
+                            <div class="panel-caption" id="quick-replies-caption">إجابات سريعة</div>
+                            <div class="quick-replies" id="quick-replies"></div>
+                        </div>
+
+                        <div class="action-links-panel" id="action-links-panel" hidden>
+                            <div class="panel-caption" id="action-links-caption">الصفحات الجاهزة</div>
+                            <div class="action-links-grid" id="action-links-grid"></div>
+                        </div>
+
+                        <form class="chat-input-area" id="chat-form">
+                            <button type="submit" id="send-btn" class="send-btn" aria-label="إرسال الرسالة">
+                                <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                            </button>
+                            <label for="user-input" class="sr-only" id="chat-input-label">اكتب الأعراض</label>
+                            <input type="text" id="user-input" name="message" class="form-control" placeholder="اكتب الأعراض هنا... مثال: أشعر بألم في الصدر مع خفقان" autocomplete="off">
+                            <div class="chat-input-tools">
+                                <button type="button" class="input-tool-btn" id="voice-btn" aria-label="تحويل الصوت إلى نص">
+                                    <i class="fas fa-microphone" aria-hidden="true"></i>
+                                    <span id="voice-btn-label">صوت</span>
+                                </button>
+                                <button type="button" class="input-tool-btn" id="speaker-toggle-btn" aria-label="تشغيل القراءة الصوتية للمساعد" aria-pressed="false">
+                                    <i class="fas fa-volume-high" aria-hidden="true"></i>
+                                    <span id="speaker-toggle-btn-label">صوت: مطفأ</span>
+                                </button>
+                                <button type="button" class="input-tool-btn" id="new-session-btn" aria-label="بدء جلسة جديدة">
+                                    <i class="fas fa-rotate-left" aria-hidden="true"></i>
+                                    <span id="new-session-btn-label">جديد</span>
+                                </button>
+                            </div>
+                        </form>
+
+                        <p class="chat-disclaimer" id="chat-disclaimer">هذه الصفحة للمحادثة فقط. التقرير، تفسير القرار، والإرشادات الداعمة ستظهر في صفحات منفصلة وأكثر ترتيبًا.</p>
+                    </section>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="consent-overlay" id="consent-overlay" hidden>
+        <div class="consent-dialog glass-card" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+            <span class="page-kicker" id="consent-kicker">قبل البدء</span>
+            <h2 id="consent-title">موافقة سريعة واستخدام آمن</h2>
+            <p id="consent-text">
+                هذه الأداة للتوجيه الطبي الأولي فقط، وليست بديلًا عن الطبيب أو الطوارئ. قد تُحفظ الجلسة والمرفقات محليًا على هذا الجهاز لتسهيل الرجوع إليها لاحقًا.
+            </p>
+            <ul class="consent-points" id="consent-points">
+                <li>لا تستخدمها عند وجود أعراض مهددة للحياة.</li>
+                <li>المخرجات مبدئية ويجب تأكيدها طبيًا.</li>
+                <li>أي صور أو ملفات ترفقها ستظهر فقط داخل هذا الجهاز ما لم تقم بمشاركتها بنفسك.</li>
+            </ul>
+            <label class="consent-check">
+                <input type="checkbox" id="consent-checkbox">
+                <span id="consent-checkbox-label">أفهم ذلك وأوافق على المتابعة.</span>
+            </label>
+            <div class="consent-actions">
+                <button type="button" class="button button-primary" id="consent-accept-btn" disabled>موافق وأبدأ</button>
+                <a href="index.html" class="button button-secondary text-decoration-none" id="consent-decline-btn">العودة للرئيسية</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="app-config.js?v=20260502h"></script>
+    <script src="script.js?v=20260502h"></script>
+</body>
+</html>

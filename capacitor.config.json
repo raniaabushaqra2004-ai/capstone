@@ -1,0 +1,9 @@
+{
+  "appId": "com.medika.guidance",
+  "appName": "Medika AI",
+  "webDir": "mobile-web",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}
