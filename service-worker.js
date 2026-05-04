@@ -1,4 +1,4 @@
-const CACHE_NAME = "medika-pwa-v6";
+const CACHE_NAME = "medika-pwa-v7";
 const APP_SHELL = [
     "./",
     "./index.html",
@@ -82,4 +82,23 @@ self.addEventListener("message", (event) => {
     if (event.data === "skip-waiting") {
         self.skipWaiting();
     }
+});
+
+self.addEventListener("notificationclick", (event) => {
+    event.notification.close();
+    const targetUrl = event.notification?.data?.url || "./report.html";
+    event.waitUntil(
+        clients.matchAll({ type: "window", includeUncontrolled: true }).then((clientList) => {
+            const absoluteUrl = new URL(targetUrl, self.location.origin).href;
+            for (const client of clientList) {
+                if (client.url === absoluteUrl && "focus" in client) {
+                    return client.focus();
+                }
+            }
+            if (clients.openWindow) {
+                return clients.openWindow(targetUrl);
+            }
+            return null;
+        })
+    );
 });

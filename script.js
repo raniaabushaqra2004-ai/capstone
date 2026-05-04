@@ -5,11 +5,16 @@ const CONSENT_KEY = "medika-ai-consent-v1";
 const PROFILE_DIRECTORY_KEY = "medika-ai-profiles-v1";
 const ACTIVE_PROFILE_KEY = "medika-ai-active-profile-v1";
 const REMINDER_STATE_KEY = "medika-ai-reminders-v1";
+const NOTIFICATION_STATE_KEY = "medika-ai-browser-notifications-v1";
 const MAX_SESSION_HISTORY = 6;
 const MAX_ANALYTICS_EVENTS = 240;
 const MAX_ATTACHMENTS = 6;
 const MAX_REMINDERS = 18;
 const REVIEW_STATUS_VALUES = ["new", "reviewed", "follow_up", "closed"];
+const NOTIFICATION_SWEEP_INTERVAL_MS = 15 * 60 * 1000;
+
+let serviceWorkerRegistrationPromise = null;
+let browserNotificationLoopStarted = false;
 
 const navToggle = document.querySelector(".nav-toggle");
 const navPanel = document.querySelector(".nav-panel");
@@ -751,6 +756,20 @@ const DASHBOARD_COPY = {
         chartReviewText: "كيف تتوزع الجلسات بين جديدة، مراجعَة، متابعة، أو مغلقة.",
         chartActivityTitle: "نشاط آخر 7 أيام",
         chartActivityText: "عدد الجلسات المحفوظة يوميًا خلال آخر أسبوع.",
+        notificationsTitle: "تنبيهات المتصفح",
+        notificationsText: "حوّل تذكيرات المتابعة المهمة إلى إشعارات متصفح فعلية على هذا الجهاز.",
+        notificationsEnable: "تفعيل التنبيهات",
+        notificationsDisable: "إيقاف التنبيهات",
+        notificationsTest: "إرسال تنبيه تجريبي",
+        notificationsUnsupported: "هذا المتصفح لا يدعم إشعارات النظام لهذا المشروع.",
+        notificationsPrompt: "التنبيهات غير مفعلة بعد. اسمح للمتصفح بالإشعارات لتظهر المتابعات المهمة.",
+        notificationsDenied: "المتصفح رفض الإشعارات. غيّر الإذن من إعدادات المتصفح إذا أردت تفعيلها.",
+        notificationsReady: "الإشعارات مفعلة. سيتم تنبيهك عند وجود متابعة مستحقة أو حالة حرجة مفتوحة.",
+        notificationsEnabled: "تم تفعيل تنبيهات المتصفح على هذا الجهاز.",
+        notificationsDisabled: "تم إيقاف تنبيهات المتصفح محليًا.",
+        notificationsTestSent: "تم إرسال تنبيه تجريبي.",
+        notificationsNoDue: "لا توجد تنبيهات مستحقة الآن.",
+        notificationBodyDefault: "افتح الملخص لمراجعة الحالة والتصرف المطلوب.",
         reviewed: "تمت المراجعة",
         markReviewed: "تعليم كمراجَعة",
         reopen: "إعادة فتح",
@@ -834,6 +853,20 @@ const DASHBOARD_COPY = {
         chartReviewText: "How sessions spread across new, reviewed, follow-up, or closed states.",
         chartActivityTitle: "Recent 7-day activity",
         chartActivityText: "Saved session volume by day across the last week.",
+        notificationsTitle: "Browser notifications",
+        notificationsText: "Turn important follow-up reminders into real browser notifications on this device.",
+        notificationsEnable: "Enable notifications",
+        notificationsDisable: "Disable notifications",
+        notificationsTest: "Send test notification",
+        notificationsUnsupported: "This browser does not support system notifications for this project.",
+        notificationsPrompt: "Notifications are not enabled yet. Allow browser notifications so important follow-ups can appear.",
+        notificationsDenied: "Browser notifications were denied. Change the permission in browser settings if you want to enable them.",
+        notificationsReady: "Notifications are enabled. You will be alerted when follow-up is due or a high-priority case stays open.",
+        notificationsEnabled: "Browser notifications were enabled on this device.",
+        notificationsDisabled: "Browser notifications were turned off locally.",
+        notificationsTestSent: "A test notification was sent.",
+        notificationsNoDue: "No due notification alerts right now.",
+        notificationBodyDefault: "Open the summary to review the case and next action.",
         reviewed: "Reviewed",
         markReviewed: "Mark reviewed",
         reopen: "Reopen",
@@ -1971,6 +2004,57 @@ const writeReminderState = (state) => {
     }
 };
 
+const readNotificationState = () => {
+    try {
+        const parsed = JSON.parse(localStorage.getItem(NOTIFICATION_STATE_KEY) || "{}");
+        return {
+            enabled: Boolean(parsed.enabled),
+            sent: parsed.sent && typeof parsed.sent === "object" ? parsed.sent : {},
+            last_permission: String(parsed.last_permission || "").trim(),
+            last_sweep_at: String(parsed.last_sweep_at || "").trim(),
+        };
+    } catch (error) {
+        return {
+            enabled: false,
+            sent: {},
+            last_permission: "",
+            last_sweep_at: "",
+        };
+    }
+};
+
+const writeNotificationState = (state) => {
+    try {
+        const entries = Object.entries(state?.sent && typeof state.sent === "object" ? state.sent : {})
+            .sort((a, b) => new Date(b[1] || 0) - new Date(a[1] || 0))
+            .slice(0, 180);
+        localStorage.setItem(
+            NOTIFICATION_STATE_KEY,
+            JSON.stringify({
+                enabled: Boolean(state?.enabled),
+                sent: Object.fromEntries(entries),
+                last_permission: String(state?.last_permission || "").trim(),
+                last_sweep_at: String(state?.last_sweep_at || "").trim(),
+            })
+        );
+    } catch (error) {
+        // Ignore notification persistence failures.
+    }
+};
+
+const isBrowserNotificationSupported = () =>
+    typeof window !== "undefined" && "Notification" in window;
+
+const getBrowserNotificationPermission = () =>
+    isBrowserNotificationSupported() ? Notification.permission : "unsupported";
+
+const syncNotificationPermissionState = () => {
+    const state = readNotificationState();
+    state.last_permission = getBrowserNotificationPermission();
+    writeNotificationState(state);
+    return state;
+};
+
 const trackAnalyticsEvent = (type, payload = {}) => {
     const state = readAnalyticsState();
     const activeProfile = readActiveProfile();
@@ -2413,6 +2497,151 @@ const buildSessionReminders = (history = readSessionHistory(), lang = getCurrent
     return reminders.sort((a, b) => a.priority - b.priority).slice(0, MAX_REMINDERS);
 };
 
+const getReminderKind = (reminder) => {
+    const text = String(reminder?.id || "");
+    const parts = text.split(":");
+    return parts[parts.length - 1] || "";
+};
+
+const shouldNotifyForReminder = (reminder) =>
+    ["risk", "follow-up", "urgent-ack"].includes(getReminderKind(reminder));
+
+const getNotificationDeliveryKey = (reminder) => {
+    const today = new Date().toISOString().slice(0, 10);
+    return `${String(reminder?.id || "reminder")}::${today}`;
+};
+
+const getNotificationIconUrl = (path = "images/app-icon-192.png") => {
+    if (typeof window === "undefined") {
+        return path;
+    }
+    return new URL(path, window.location.href).toString();
+};
+
+const buildReminderNotificationPayload = (reminder, lang = getCurrentLanguage()) => {
+    const complaint = String(reminder?.session?.complaint || "").trim();
+    const title =
+        lang === "en"
+            ? complaint
+                ? `Medika AI follow-up: ${complaint.slice(0, 54)}`
+                : "Medika AI follow-up reminder"
+            : complaint
+                ? `متابعة Medika AI: ${complaint.slice(0, 54)}`
+                : "تذكير متابعة من Medika AI";
+    const body = [String(reminder?.text || "").trim(), String(reminder?.meta || "").trim()]
+        .filter(Boolean)
+        .join(" • ") || DASHBOARD_COPY[lang].notificationBodyDefault;
+    return {
+        title,
+        body,
+        tag: `medika-${String(reminder?.id || "reminder")}`,
+        icon: getNotificationIconUrl("images/app-icon-192.png"),
+        badge: getNotificationIconUrl("images/app-icon-192.png"),
+        data: {
+            url: `report.html?lang=${lang}`,
+            sessionId: reminder?.sessionId || "",
+            reminderId: reminder?.id || "",
+        },
+    };
+};
+
+const showBrowserNotification = async (payload) => {
+    if (!isBrowserNotificationSupported() || getBrowserNotificationPermission() !== "granted") {
+        return false;
+    }
+    try {
+        const registration = serviceWorkerRegistrationPromise
+            ? await serviceWorkerRegistrationPromise.catch(() => null)
+            : await navigator.serviceWorker?.ready?.catch?.(() => null);
+        if (registration?.showNotification) {
+            await registration.showNotification(payload.title, {
+                body: payload.body,
+                icon: payload.icon,
+                badge: payload.badge,
+                tag: payload.tag,
+                data: payload.data,
+                renotify: false,
+            });
+            return true;
+        }
+        if (typeof Notification !== "undefined") {
+            const notification = new Notification(payload.title, {
+                body: payload.body,
+                icon: payload.icon,
+                tag: payload.tag,
+                data: payload.data,
+            });
+            notification.onclick = () => {
+                if (payload.data?.url) {
+                    window.focus?.();
+                    window.location.href = payload.data.url;
+                }
+            };
+            return true;
+        }
+    } catch (error) {
+        console.warn("Notification delivery failed:", error);
+    }
+    return false;
+};
+
+const requestBrowserNotificationPermission = async () => {
+    if (!isBrowserNotificationSupported()) {
+        return "unsupported";
+    }
+    try {
+        const permission = await Notification.requestPermission();
+        const state = readNotificationState();
+        state.last_permission = permission;
+        if (permission !== "granted") {
+            state.enabled = false;
+        }
+        writeNotificationState(state);
+        return permission;
+    } catch (error) {
+        return "denied";
+    }
+};
+
+const triggerReminderNotifications = async (historyEntries = readSessionHistory(), lang = getCurrentLanguage(), options = {}) => {
+    const { force = false } = options;
+    const state = syncNotificationPermissionState();
+    if (!state.enabled || state.last_permission !== "granted") {
+        return 0;
+    }
+    const reminders = buildSessionReminders(historyEntries, lang).filter((reminder) => shouldNotifyForReminder(reminder));
+    let sentCount = 0;
+    for (const reminder of reminders) {
+        const key = getNotificationDeliveryKey(reminder);
+        if (!force && state.sent[key]) {
+            continue;
+        }
+        const delivered = await showBrowserNotification(buildReminderNotificationPayload(reminder, lang));
+        if (delivered) {
+            state.sent[key] = new Date().toISOString();
+            sentCount += 1;
+        }
+    }
+    state.last_sweep_at = new Date().toISOString();
+    writeNotificationState(state);
+    return sentCount;
+};
+
+const startBrowserReminderNotificationLoop = () => {
+    if (browserNotificationLoopStarted || typeof window === "undefined") {
+        return;
+    }
+    browserNotificationLoopStarted = true;
+    const runSweep = () => triggerReminderNotifications(readSessionHistory(), getCurrentLanguage()).catch(() => 0);
+    window.setTimeout(runSweep, 2200);
+    window.setInterval(runSweep, NOTIFICATION_SWEEP_INTERVAL_MS);
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+            runSweep();
+        }
+    });
+};
+
 const buildDistribution = (items, labelFn = (value) => value) => {
     const counts = new Map();
     items.filter(Boolean).forEach((value) => counts.set(value, (counts.get(value) || 0) + 1));
@@ -2604,9 +2833,13 @@ const hidePwaInstallButton = () => {
 
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-        navigator.serviceWorker.register("service-worker.js").catch((error) => {
-            console.warn("Service worker registration failed:", error);
-        });
+        serviceWorkerRegistrationPromise = navigator.serviceWorker.register("service-worker.js")
+            .then((registration) => registration)
+            .catch((error) => {
+                console.warn("Service worker registration failed:", error);
+                return null;
+            });
+        startBrowserReminderNotificationLoop();
     });
 }
 
@@ -5136,6 +5369,7 @@ const bindCaseManagementEditor = (session) => {
         }
         renderCaseSnapshot(session);
         renderUrgentChecklistCard(session);
+        triggerReminderNotifications(readSessionHistory(), pageLang).catch(() => 0);
         window.setTimeout(refresh, 1500);
     });
 
@@ -6329,6 +6563,9 @@ if (dashboardPage) {
     const riskChart = document.getElementById("dashboard-risk-chart");
     const reviewChart = document.getElementById("dashboard-review-chart");
     const activityChart = document.getElementById("dashboard-activity-chart");
+    const notificationStatus = document.getElementById("dashboard-notification-status");
+    const notificationEnableBtn = document.getElementById("dashboard-notifications-enable-btn");
+    const notificationTestBtn = document.getElementById("dashboard-notifications-test-btn");
 
     const setNode = (id, value) => {
         const node = document.getElementById(id);
@@ -6364,6 +6601,8 @@ if (dashboardPage) {
     setNode("dashboard-insights-text", copy.insightsText);
     setNode("dashboard-reminders-title", copy.remindersTitle);
     setNode("dashboard-reminders-text", copy.remindersText);
+    setNode("dashboard-notifications-title", copy.notificationsTitle);
+    setNode("dashboard-notifications-text", copy.notificationsText);
     setNode("dashboard-chart-specialty-title", copy.chartSpecialtyTitle);
     setNode("dashboard-chart-specialty-text", copy.chartSpecialtyText);
     setNode("dashboard-chart-risk-title", copy.chartRiskTitle);
@@ -6495,6 +6734,47 @@ if (dashboardPage) {
         });
     };
 
+    const renderDashboardNotificationPanel = (historyEntries) => {
+        if (!notificationStatus) {
+            return;
+        }
+        const state = syncNotificationPermissionState();
+        const supported = isBrowserNotificationSupported();
+        const permission = state.last_permission || getBrowserNotificationPermission();
+        const dueNotificationCount = buildSessionReminders(historyEntries, lang).filter((reminder) => shouldNotifyForReminder(reminder)).length;
+
+        let statusText = copy.notificationsUnsupported;
+        if (supported) {
+            if (permission === "denied") {
+                statusText = copy.notificationsDenied;
+            } else if (!state.enabled || permission !== "granted") {
+                statusText = copy.notificationsPrompt;
+            } else if (dueNotificationCount > 0) {
+                statusText =
+                    lang === "en"
+                        ? `${copy.notificationsReady} ${dueNotificationCount} alert(s) are currently eligible.`
+                        : `${copy.notificationsReady} يوجد ${dueNotificationCount} تنبيه مؤهل حاليًا.`;
+            } else {
+                statusText = `${copy.notificationsReady} ${copy.notificationsNoDue}`;
+            }
+        }
+
+        notificationStatus.textContent = statusText;
+
+        if (notificationEnableBtn) {
+            notificationEnableBtn.textContent =
+                supported && state.enabled && permission === "granted"
+                    ? copy.notificationsDisable
+                    : copy.notificationsEnable;
+            notificationEnableBtn.disabled = !supported;
+        }
+
+        if (notificationTestBtn) {
+            notificationTestBtn.textContent = copy.notificationsTest;
+            notificationTestBtn.disabled = !supported || permission !== "granted" || !state.enabled;
+        }
+    };
+
     const renderDashboardReminders = (historyEntries) => {
         if (!remindersList) {
             return;
@@ -6595,7 +6875,9 @@ if (dashboardPage) {
         renderDashboardProfile();
         renderDashboardInsights(historyEntries);
         renderDashboardReminders(historyEntries);
+        renderDashboardNotificationPanel(historyEntries);
         renderDashboardCharts(historyEntries);
+        triggerReminderNotifications(historyEntries, lang).catch(() => 0);
     };
 
     const renderDashboardSessions = () => {
@@ -6778,6 +7060,61 @@ if (dashboardPage) {
         setNode("dashboard-clear-analytics-btn", copy.cleared);
         window.setTimeout(() => setNode("dashboard-clear-analytics-btn", copy.clear), 1500);
         refreshDashboardMeta();
+    });
+
+    notificationEnableBtn?.addEventListener("click", async () => {
+        const supported = isBrowserNotificationSupported();
+        if (!supported) {
+            renderDashboardNotificationPanel(readSessionHistory());
+            return;
+        }
+        const current = syncNotificationPermissionState();
+        if (current.enabled && current.last_permission === "granted") {
+            current.enabled = false;
+            writeNotificationState(current);
+            trackAnalyticsEvent("notifications_disabled");
+            notificationStatus.textContent = copy.notificationsDisabled;
+            renderDashboardNotificationPanel(readSessionHistory());
+            return;
+        }
+        const permission = await requestBrowserNotificationPermission();
+        const nextState = readNotificationState();
+        if (permission === "granted") {
+            nextState.enabled = true;
+            nextState.last_permission = permission;
+            writeNotificationState(nextState);
+            trackAnalyticsEvent("notifications_enabled");
+            notificationStatus.textContent = copy.notificationsEnabled;
+            await triggerReminderNotifications(readSessionHistory(), lang);
+        } else {
+            nextState.enabled = false;
+            nextState.last_permission = permission;
+            writeNotificationState(nextState);
+            notificationStatus.textContent =
+                permission === "denied" ? copy.notificationsDenied : copy.notificationsPrompt;
+        }
+        renderDashboardNotificationPanel(readSessionHistory());
+    });
+
+    notificationTestBtn?.addEventListener("click", async () => {
+        const state = syncNotificationPermissionState();
+        if (!isBrowserNotificationSupported() || !state.enabled || state.last_permission !== "granted") {
+            renderDashboardNotificationPanel(readSessionHistory());
+            return;
+        }
+        const delivered = await showBrowserNotification({
+            title: lang === "en" ? "Medika AI test notification" : "تنبيه تجريبي من Medika AI",
+            body: copy.notificationsTestSent,
+            tag: "medika-test-notification",
+            icon: getNotificationIconUrl("images/app-icon-192.png"),
+            badge: getNotificationIconUrl("images/app-icon-192.png"),
+            data: { url: `dashboard.html?lang=${lang}`, test: true },
+        });
+        if (delivered) {
+            trackAnalyticsEvent("notifications_test_sent");
+            notificationStatus.textContent = copy.notificationsTestSent;
+        }
+        renderDashboardNotificationPanel(readSessionHistory());
     });
 
     refreshDashboardMeta();

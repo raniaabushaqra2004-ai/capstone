@@ -2463,7 +2463,9 @@ body.is-ltr .message-bubble-actions {
 .chat-input-area {
     position: sticky;
     bottom: 0;
-    display: flex;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "send input tools";
     align-items: center;
     gap: 0.75rem;
     margin-top: auto;
@@ -2471,16 +2473,30 @@ body.is-ltr .message-bubble-actions {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0), #ffffff 34%);
 }
 
+.chat-input-area .send-btn {
+    grid-area: send;
+}
+
+.chat-input-area input {
+    grid-area: input;
+}
+
 .chat-input-tools {
+    grid-area: tools;
     display: flex;
     align-items: center;
     gap: 0.55rem;
     flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .input-tool-btn {
     padding: 0.86rem 1rem;
     white-space: nowrap;
+}
+
+.input-tool-btn span {
+    line-height: 1.15;
 }
 
 .input-tool-btn.is-listening {
@@ -3400,10 +3416,17 @@ body.is-ltr .pwa-install-btn {
         transform: none;
     }
 
-    .hero-copy-premium .hero-mini-flow,
-    .chat-input-area {
+    .hero-copy-premium .hero-mini-flow {
         flex-wrap: wrap;
         grid-template-columns: 1fr;
+    }
+
+    .chat-input-area {
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas:
+            "input send"
+            "tools tools";
+        align-items: stretch;
     }
 
     .chat-intro,
@@ -3465,11 +3488,19 @@ body.is-ltr .pwa-install-btn {
 
     .chat-input-tools {
         width: 100%;
-        justify-content: stretch;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: stretch;
+        gap: 0.65rem;
     }
 
     .input-tool-btn {
-        flex: 1 1 0;
+        min-height: 3.55rem;
+        padding: 0.8rem 0.7rem;
+        border-radius: 22px;
+        white-space: normal;
+        flex: none;
+        text-align: center;
     }
 
     .send-btn {
@@ -3922,6 +3953,23 @@ body.consent-is-open {
     font-size: 1.18rem;
 }
 
+.dashboard-notification-status {
+    padding: 0.95rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(123, 24, 63, 0.12);
+    background: rgba(255, 250, 252, 0.84);
+    color: var(--text);
+    line-height: 1.8;
+    font-weight: 600;
+}
+
+.dashboard-notification-actions {
+    display: flex;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    margin-top: 0.9rem;
+}
+
 .dashboard-profile-badge {
     display: inline-flex;
     width: fit-content;
@@ -4228,7 +4276,8 @@ body.consent-is-open {
 }
 
 :root[data-theme="dark"] .account-role-btn,
-:root[data-theme="dark"] .dashboard-reminder-card {
+:root[data-theme="dark"] .dashboard-reminder-card,
+:root[data-theme="dark"] .dashboard-notification-status {
     background: rgba(17, 24, 39, 0.88);
     border-color: rgba(255, 255, 255, 0.08);
     color: #f8fafc;
@@ -4328,6 +4377,11 @@ body.consent-is-open {
         flex-direction: column;
     }
 
+    .dashboard-notification-actions .button {
+        width: 100%;
+        justify-content: center;
+    }
+
     .case-status-group,
     .dashboard-session-badges {
         flex-direction: column;
@@ -4335,5 +4389,21 @@ body.consent-is-open {
 
     .mobile-bottom-nav {
         inset-inline: 0.6rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .input-tool-btn {
+        min-height: 3.35rem;
+        padding: 0.72rem 0.55rem;
+        gap: 0.35rem;
+    }
+
+    .input-tool-btn i {
+        font-size: 0.95rem;
+    }
+
+    .input-tool-btn span {
+        font-size: 0.92rem;
     }
 }
